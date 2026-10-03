@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/BrightLight/static/css/main.597b79b1.chunk.css",
+    "main.js": "/BrightLight/static/js/main.2d256e46.chunk.js",
+    "main.js.map": "/BrightLight/static/js/main.2d256e46.chunk.js.map",
+    "runtime-main.js": "/BrightLight/static/js/runtime-main.c9dc1027.js",
+    "runtime-main.js.map": "/BrightLight/static/js/runtime-main.c9dc1027.js.map",
+    "static/css/2.653ab193.chunk.css": "/BrightLight/static/css/2.653ab193.chunk.css",
+    "static/js/2.b36d228a.chunk.js": "/BrightLight/static/js/2.b36d228a.chunk.js",
+    "static/js/2.b36d228a.chunk.js.map": "/BrightLight/static/js/2.b36d228a.chunk.js.map",
+    "index.html": "/BrightLight/index.html",
+    "precache-manifest.e0bb209465b348696cb051023a7f5542.js": "/BrightLight/precache-manifest.e0bb209465b348696cb051023a7f5542.js",
+    "service-worker.js": "/BrightLight/service-worker.js",
+    "static/css/2.653ab193.chunk.css.map": "/BrightLight/static/css/2.653ab193.chunk.css.map",
+    "static/css/main.597b79b1.chunk.css.map": "/BrightLight/static/css/main.597b79b1.chunk.css.map",
+    "static/media/semantic.min.css": "/BrightLight/static/media/outline-icons.ef60a4f6.woff"
+  }
+}

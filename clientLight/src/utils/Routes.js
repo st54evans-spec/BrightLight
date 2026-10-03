@@ -13,6 +13,7 @@ import ShowMe from "../components/showme";
 const Routes = () => {
   return (
     <div>
+      <Route exact path="/" component={Landing} />
       <Route exact path="/landing" component={Landing} />
       <Route path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
