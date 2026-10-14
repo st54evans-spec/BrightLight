@@ -9,6 +9,7 @@ import Volatility from "../components/volatility/Volatility";
 import Scrolltext from "../components/starScroll/starwarsText";
 import Goodbye from "../components/goodbye/goodbye";
 import ShowMe from "../components/showme";
+import FinanceDesk from "../components/finance/FinanceDesk";
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
       <Route path="/scrolltext" component={Scrolltext} />
       <Route path="/goodbye" component={Goodbye} />
       <Route path="/showme" component={ShowMe} />
+      <Route path="/finance" component={FinanceDesk} />
     </div>
   );
 };

@@ -38,6 +38,15 @@ export default class TradeNav extends Component {
             <Input icon="search" placeholder="Search..." />
           </Menu.Item> */}
           <Menu.Item
+            name="Finance"
+            as={Nav}
+            to={"/finance"}
+            active={activeItem === "Finance"}
+            onClick={this.handleItemClick}
+          >
+            Finance
+          </Menu.Item>
+          <Menu.Item
             name="Story"
             as={Nav}
             to={"/scrolltext"}
