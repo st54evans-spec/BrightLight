@@ -60,5 +60,5 @@ typings/
 # next.js build output
 .next
 
-# finance test databases
-database/test-*.db3
+# SQLite databases. Knex migrations create these from scratch; do not commit them.
+database/*.db3
