@@ -8,7 +8,7 @@ Rename him with `FINANCE_BOT_NAME`.
 
 | Area | How | Where |
 |---|---|---|
-| Calendar: taxes, bills, invoices | Seeds federal + NJ deadlines (1040/NJ-1040, 1040-ES, ST-50 sales tax, W-2/1099, extensions) plus bill-pay and invoice cadence; weekend dates roll to the next business day | `finance/calendar.js`, `POST /api/finance/calendar/seed/:year` |
+| Calendar: taxes, bills, invoices | Seeds federal + NJ deadlines (1040/NJ-1040, 1040-ES, ST-50 sales tax, W-2/1099, extensions) plus bill-pay and invoice cadence; weekend dates roll to the next business day. Tax year 2026 1040-ES is Apr 15 2026, Jun 15 2026, Sep 15 2026, Jan 15 2027; the 2026 return is due Apr 15 2027 | `finance/calendar.js`, `POST /api/finance/calendar/seed/:year` |
 | NJ + federal taxes (family + Schedule C) | 2026 federal brackets, standard deduction, child credit, SE tax, QBI; NJ gross income tax brackets and exemptions; quarterly estimates | `finance/taxTables.js`, `calculators.taxEstimate` |
 | Business loan: high value, low year-one payments, best interest | Lender catalog (SBA 7(a), 504, NJEDA, credit union, online, LOC) scored on year-one cash outlay, total interest, max size; interest-only and stepped first-year structures | `finance/lenders.js`, `calculators.compareLoans` |
 | HELOC on 2034 Lambert Ave | Sizes the line to clear every liability account plus the renovation budget, checks CLTV, compares blended rates, shows payment during draw vs repay, lists NJ HELOC lenders | `calculators.helocRefinance`, `POST /api/finance/heloc` |
@@ -27,7 +27,7 @@ The bot calls these as tools (`finance/tools.js`), so his answers are computed, 
 ```bash
 cp .env.example .env            # add XAI_API_KEY at minimum
 npm install
-npm run migrate                 # creates the finance_* tables
+npm run migrate                 # builds the SQLite database from the knex migrations
 npm start                       # API on :3111
 
 cd clientLight && npm install
@@ -37,12 +37,23 @@ REACT_APP_API_URL=http://localhost:3111 npm start
 Register, log in, open **Finance** in the nav bar (`/finance`). First click **Load tax + bill dates** on the calendar, then add accounts and a few transactions under **Charts** so the move-readiness and HELOC tools have real numbers.
 
 ```bash
-npm test                        # 24 tests: calculators, calendar, forms, PDF fill, full API smoke
+npm test                        # 27 tests: calculators, calendar, forms, PDF fill, Grok request shape, full API smoke
 ```
+
+## Database
+
+`database/*.db3` is gitignored. `database/auth.db3` is a local SQLite file and is not part of the repo.
+
+`npm run migrate` runs `knex migrate:latest`. On a missing database it builds every table from scratch:
+
+1. `database/migrations/20190920152428_bootstrap.js` creates `users`.
+2. `database/migrations/20261014120000_finance.js` creates the finance tables: profile, calendar events, accounts, transactions, goals, documents, messages, integrations, and credit reports.
+
+Development points at `./database/auth.db3` (`knexfile.js`). Production uses Postgres via `DATABASE_URL` and the same migration files. To rebuild a local database, delete `database/auth.db3` and run `npm run migrate` again.
 
 ## Connect the data sources
 
-- **Grok**: `XAI_API_KEY` from console.x.ai. `XAI_LIVE_SEARCH=on` lets him look up current lender rates and refresh the catalog in conversation.
+- **Grok**: `XAI_API_KEY` from console.x.ai. Chat goes to the Responses API (`/v1/responses`). `XAI_AGENT_TOOLS=on` (the default) adds the server-side `web_search` and `x_search` tools so he can look up current lender rates. The deprecated Live Search field `search_parameters` is not sent. `XAI_LIVE_SEARCH` is still accepted as an alias when `XAI_AGENT_TOOLS` is unset.
 - **Bank, card, investment accounts**: Plaid. Set `PLAID_CLIENT_ID`/`PLAID_SECRET`, open Plaid Link on the client with `POST /api/finance/plaid/link-token`, send the public token to `POST /api/finance/plaid/exchange`, then `POST /api/finance/plaid/sync` on a schedule.
 - **Credit reports**: any provider that accepts `POST {consumer, consent}` and returns `{bureau, score, report}` (Array, CRS, Experian Connect all need a signed agreement). Set `CREDIT_API_URL`/`CREDIT_API_KEY`. Without one, upload the free weekly report summary to `POST /api/finance/credit/upload`.
 - **Brokerage**: not wired. Add an investment account manually or through Plaid; trading stays in your broker.

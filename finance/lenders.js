@@ -1,5 +1,5 @@
 // Lender catalogs. Rates are INDICATIVE as of Oct 2026 (WSJ prime 6.75%).
-// The bot refreshes these via live search when XAI_API_KEY is set; otherwise edit here.
+// The bot refreshes these with xAI server-side web_search / x_search when XAI_API_KEY is set; otherwise edit here.
 // Structure: "standard" | "interest_only" | "stepped" describes how year one can be paid.
 
 const PRIME = Number(process.env.PRIME_RATE || 0.0675);

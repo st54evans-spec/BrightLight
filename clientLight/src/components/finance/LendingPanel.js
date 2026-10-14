@@ -86,7 +86,7 @@ export default function LendingPanel() {
                 ))}
               </tbody>
             </table>
-            <p className="fin-note">Indicative rates (prime 6.75%). Ask the accountant to refresh quotes with live search, then paste real offers.</p>
+            <p className="fin-note">Indicative rates (prime 6.75%). Ask the accountant to refresh quotes with web search, then paste real offers.</p>
           </div>
         )}
       </div>

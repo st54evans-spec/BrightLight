@@ -22,8 +22,16 @@ const tools = {
       return { accounts, cash: s.cash, netWorth: s.netWorth, business: s.business, spendingPie: s.spendingPie, months: s.cashFlowBar.labels.length };
     },
   },
+  get_tax_deadlines: {
+    description: "Authoritative federal + NJ tax due dates for a tax year. 1040-ES installments and the return date come only from this tool (weekend dates already rolled to the next business day). Never invent a due date.",
+    parameters: { type: "object", required: ["year"], properties: { year: num("Tax year, e.g. 2026") } },
+    handler: async ({ year }, ctx) => {
+      const profile = await models.getProfile(ctx.userId);
+      return { taxYear: Number(year), deadlines: calendar.taxYearDeadlines(year, profile.entity) };
+    },
+  },
   get_upcoming_events: {
-    description: "Financial calendar: taxes, bills, invoices, bookkeeping. Defaults to the next 45 days.",
+    description: "Financial calendar: taxes, bills, invoices, bookkeeping. Defaults to the next 45 days. Due dates already stored here are authoritative; do not replace them with a guess.",
     parameters: { type: "object", properties: { days: num("Look-ahead window in days"), category: str("tax|bill|invoice|bookkeeping|planning|compliance|loan|insurance") } },
     handler: async ({ days = 45, category }, ctx) => {
       const from = new Date().toISOString().slice(0, 10);
@@ -42,7 +50,7 @@ const tools = {
     handler: ({ id }, ctx) => models.updateEvent(ctx.userId, id, { status: "done" }),
   },
   seed_tax_calendar: {
-    description: "Load all federal + NJ tax deadlines and default bill/invoice cadence for a year.",
+    description: "Load federal + NJ tax deadlines that fall in a calendar year, plus the default bill/invoice cadence. 1040-ES and the return use the tax-year schedule (weekend-adjusted). Q4 and the Form 1040 for a tax year fall in the next calendar year. For the full tax-year list, call get_tax_deadlines.",
     parameters: { type: "object", required: ["year"], properties: { year: num("Calendar year") } },
     handler: async ({ year }, ctx) => {
       const profile = await models.getProfile(ctx.userId);
@@ -150,10 +158,15 @@ function openAiToolDefs() {
   return Object.entries(tools).map(([name, t]) => ({ type: "function", function: { name, description: t.description, parameters: t.parameters } }));
 }
 
+/** Flat function tools for the xAI Responses API (name sits on the tool, not under function). */
+function responsesToolDefs() {
+  return Object.entries(tools).map(([name, t]) => ({ type: "function", name, description: t.description, parameters: t.parameters }));
+}
+
 async function run(name, args, ctx) {
   const t = tools[name];
   if (!t) throw new Error("Unknown tool " + name);
   return t.handler(args || {}, ctx);
 }
 
-module.exports = { tools, openAiToolDefs, run };
+module.exports = { tools, openAiToolDefs, responsesToolDefs, run };

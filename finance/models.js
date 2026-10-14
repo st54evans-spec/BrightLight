@@ -30,6 +30,14 @@ async function saveProfile(userId, data) {
 }
 
 // ---- events ----
+// taxYear / quarter / kind ride along on the in-memory schedule for the tool.
+// Only real columns are written.
+const EVENT_COLUMNS = ["date", "title", "category", "jurisdiction", "form", "amount", "status", "source", "notes"];
+function eventRow(userId, e) {
+  const row = { user_id: userId };
+  for (const key of EVENT_COLUMNS) if (e[key] !== undefined) row[key] = e[key];
+  return row;
+}
 function listEvents(userId, { from, to, category, status } = {}) {
   let q = db("finance_events").where({ user_id: userId }).orderBy("date");
   if (from) q = q.where("date", ">=", from);
@@ -38,13 +46,13 @@ function listEvents(userId, { from, to, category, status } = {}) {
   if (status) q = q.where({ status });
   return q;
 }
-const addEvent = (userId, e) => insertAndFetch("finance_events", { ...e, user_id: userId });
+const addEvent = (userId, e) => insertAndFetch("finance_events", eventRow(userId, e));
 async function addEvents(userId, events) {
   if (!events.length) return 0;
   // Skip duplicates (same date + title) so re-seeding is safe.
   const existing = await db("finance_events").where({ user_id: userId }).select("date", "title");
   const seen = new Set(existing.map((e) => e.date + "|" + e.title));
-  const fresh = events.filter((e) => !seen.has(e.date + "|" + e.title)).map((e) => ({ ...e, user_id: userId }));
+  const fresh = events.filter((e) => !seen.has(e.date + "|" + e.title)).map((e) => eventRow(userId, e));
   for (let i = 0; i < fresh.length; i += 100) await db("finance_events").insert(fresh.slice(i, i + 100));
   return fresh.length;
 }
