@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# SQLite databases. Knex migrations create these from scratch; do not commit them.
+database/*.db3
