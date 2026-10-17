@@ -123,8 +123,28 @@ const tools = {
       return calc.moveReadiness({ cash: s.cash, ...s.business, ...a });
     },
   },
+  unit_economics: {
+    description: "Small-business break-even and unit economics. Break-even units = fixed costs / contribution margin per unit. Also compares a lower price against the extra volume it needs, and shows where marketing spend saturates. Explain the returned explanation in plain, optimistic language. Do not invent costs the owner did not give.",
+    parameters: {
+      type: "object",
+      required: ["price"],
+      properties: {
+        price: num("Current selling price per unit"),
+        unitCost: num("Variable cost to make one unit, before fees"),
+        feePct: num("Marketplace or payment fee as a fraction of price, e.g. 0.03"),
+        fixedCosts: num("Fixed costs for the period (rent, software, base payroll)"),
+        units: num("Units expected or already selling in that period"),
+        alternatePrice: num("A lower price to test, such as a discounted T-shirt"),
+        alternateUnits: num("Units expected at the lower price. Omit to get the volume required to match current profit."),
+        marketingSpend: num("Extra marketing spend in the period"),
+        saturationUnits: num("Max extra units marketing can add before demand flattens"),
+        saturationSpend: num("Spend at which most of those extra units have already been reached"),
+      },
+    },
+    handler: (a) => calc.unitEconomics(a),
+  },
   pricing_plan: {
-    description: "Top-dollar pricing: list price, floor, break-even, and a drop schedule to sell by a date.",
+    description: "Top-dollar pricing: list price, floor, break-even after fees, and a drop schedule to sell by a date. For fixed-cost break-even and price or marketing tradeoffs, use unit_economics.",
     parameters: { type: "object", required: ["unitCost"], properties: { unitCost: num(""), targetMarginPct: num("default 0.55"), marketLow: num(""), marketHigh: num(""), units: num(""), mustSellByDays: num("default 30"), fees: num("marketplace/payment fees, default 0.03") } },
     handler: (a) => calc.pricingPlan(a),
   },

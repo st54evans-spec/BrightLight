@@ -447,6 +447,146 @@ function pricingPlan({ unitCost = 0, targetMarginPct = 0.55, marketLow = null, m
   };
 }
 
+// ---------- Break-even and unit economics ----------
+
+/**
+ * Break-even units = fixed costs / contribution margin per unit.
+ * Contribution margin = price minus the cost to make and sell one unit (unit cost + price fees).
+ * A lower price pays off only when the extra volume replaces the lost margin.
+ * Marketing adds units on a saturating curve and stops paying when the next dollar
+ * returns less than a dollar of contribution margin.
+ */
+function unitEconomics({
+  price,
+  unitCost = 0,
+  feePct = 0,
+  fixedCosts = 0,
+  units = 0,
+  alternatePrice = null,
+  alternateUnits = null,
+  marketingSpend = 0,
+  saturationUnits = null,
+  saturationSpend = null,
+} = {}) {
+  const P = Number(price);
+  if (!Number.isFinite(P) || P <= 0) {
+    return { ok: false, explanation: ["Need a selling price above zero before the break-even math means anything."] };
+  }
+  const variableCost = Number(unitCost) + P * Number(feePct || 0);
+  const margin = P - variableCost;
+  const fixed = Number(fixedCosts) || 0;
+  const qty = Number(units) || 0;
+  if (margin <= 0) {
+    return {
+      ok: false,
+      price: round(P),
+      variableCostPerUnit: round(variableCost),
+      contributionMarginPerUnit: round(margin),
+      explanation: [
+        "Each sale brings in less than it costs to make and sell. A higher price or a lower unit cost is what opens a path to profit. Selling more units cannot fix a negative margin, and that is a useful thing to know early.",
+      ],
+    };
+  }
+  const breakEvenUnits = fixed / margin;
+  const profit = margin * qty - fixed;
+  const result = {
+    ok: true,
+    price: round(P),
+    variableCostPerUnit: round(variableCost),
+    contributionMarginPerUnit: round(margin),
+    contributionMarginRatio: round(margin / P, 4),
+    fixedCosts: round(fixed),
+    units: qty,
+    breakEvenUnits: round(breakEvenUnits, 2),
+    breakEvenRevenue: round(breakEvenUnits * P),
+    profit: round(profit),
+    explanation: [
+      `Each unit keeps $${round(margin)} after the cost to make and sell it. That leftover is the contribution margin.`,
+      fixed > 0
+        ? `Fixed costs of $${round(fixed)} are covered at ${round(breakEvenUnits, 2)} units, about $${round(breakEvenUnits * P)} of sales. Every unit after that is profit.`
+        : "No fixed costs are in this picture, so the first unit is already past break-even.",
+    ],
+  };
+  if (qty > 0) {
+    result.explanation.push(
+      profit >= 0
+        ? `At ${qty} units you are ${round(qty - breakEvenUnits, 2)} units past break-even, about $${round(profit)} in profit. That is a real cushion.`
+        : `At ${qty} units you are ${round(breakEvenUnits - qty, 2)} units short of break-even, a gap of about $${round(-profit)}. More units or a stronger margin closes it.`
+    );
+  }
+
+  if (alternatePrice != null) {
+    const P2 = Number(alternatePrice);
+    const margin2 = P2 - (Number(unitCost) + P2 * Number(feePct || 0));
+    if (margin2 <= 0) {
+      result.priceCut = {
+        alternatePrice: round(P2),
+        contributionMarginPerUnit: round(margin2),
+        paysOff: false,
+        explanation: `$${round(P2)} does not cover the cost of the unit. The tradeoff starts only once the lower price still leaves a positive margin.`,
+      };
+    } else {
+      const unitsToMatch = qty > 0 ? (margin * qty) / margin2 : fixed / margin2;
+      const extraNeeded = qty > 0 ? unitsToMatch - qty : unitsToMatch;
+      const Q2 = alternateUnits == null ? null : Number(alternateUnits);
+      const profit2 = Q2 == null ? null : margin2 * Q2 - fixed;
+      const paysOff = profit2 == null ? null : profit2 + 1e-9 >= profit;
+      result.priceCut = {
+        alternatePrice: round(P2),
+        contributionMarginPerUnit: round(margin2),
+        unitsToMatchCurrentProfit: round(unitsToMatch, 2),
+        extraUnitsNeeded: round(extraNeeded, 2),
+        liftNeededPct: qty > 0 ? round(extraNeeded / qty, 4) : null,
+        alternateUnits: Q2,
+        profitAtAlternate: profit2 == null ? null : round(profit2),
+        paysOff,
+        explanation:
+          Q2 == null
+            ? `At $${round(P2)} each unit keeps $${round(margin2)} instead of $${round(margin)}. The same profit comes back at about ${round(unitsToMatch, 2)} units. If the lower price can sell more than that, it is the better offer. If it cannot, keep the higher price.`
+            : paysOff
+            ? `At $${round(P2)} and ${Q2} units, profit is about $${round(profit2)}. The thinner margin is earning its keep.`
+            : `At $${round(P2)} and ${Q2} units, profit is about $${round(profit2)}. The cut starts paying off around ${round(unitsToMatch, 2)} units. Until volume gets there, the higher price wins.`,
+      };
+    }
+    result.explanation.push(result.priceCut.explanation);
+  }
+
+  const spend = Number(marketingSpend) || 0;
+  if (spend > 0) {
+    const unitsToCover = spend / margin;
+    const marketing = {
+      marketingSpend: round(spend),
+      extraUnitsToBreakEven: round(unitsToCover, 2),
+    };
+    const S = saturationUnits == null ? null : Number(saturationUnits);
+    const k = saturationSpend == null ? null : Number(saturationSpend);
+    if (S > 0 && k > 0) {
+      const extra = S * (1 - Math.exp(-spend / k));
+      const marginalPerDollar = (S / k) * Math.exp(-spend / k);
+      const marginalContribution = margin * marginalPerDollar;
+      const stopSpend = margin * S > k ? -k * Math.log(k / (margin * S)) : null;
+      marketing.saturationUnits = S;
+      marketing.saturationSpend = round(k);
+      marketing.extraUnitsAtSpend = round(extra, 2);
+      marketing.profitAfterSpend = round(extra * margin - spend);
+      marketing.marginalContributionPerDollar = round(marginalContribution, 2);
+      marketing.spendWhereNextDollarStopsPaying = stopSpend == null ? null : round(Math.max(stopSpend, 0));
+      marketing.paysOff = extra * margin + 1e-9 >= spend;
+      marketing.explanation =
+        stopSpend == null
+          ? `At this saturation, even the first marketing dollar returns less than a dollar of margin. A stronger margin or a bigger reachable audience is what makes the spend work.`
+          : marketing.paysOff
+          ? `About $${round(spend)} of marketing adds roughly ${round(extra, 2)} units before demand flattens, and that covers the spend with about $${round(extra * margin - spend)} left over. The next dollar stops paying off near $${round(stopSpend)} of spend, where new buyers get scarce. Spend up to that neighborhood, then put the rest back into the product.`
+          : `About $${round(spend)} of marketing adds roughly ${round(extra, 2)} units, short of the ${round(unitsToCover, 2)} extra units that would cover it. Demand tops out near ${S} extra units, and the next dollar stops earning its keep around $${round(stopSpend)}. Aim the budget at the steep part of that curve.`;
+    } else {
+      marketing.explanation = `This $${round(spend)} pays for itself at about ${round(unitsToCover, 2)} extra units, since each one contributes $${round(margin)}. Early spend usually finds the easy buyers. Later spend hits a ceiling. Give the max extra units marketing can add, and the spend that gets most of the way there, and this will name the dollar where it stops paying off.`;
+    }
+    result.marketing = marketing;
+    result.explanation.push(marketing.explanation);
+  }
+  return result;
+}
+
 module.exports = {
   monthlyPayment,
   amortize,
@@ -459,4 +599,5 @@ module.exports = {
   educationProjection,
   moveReadiness,
   pricingPlan,
+  unitEconomics,
 };

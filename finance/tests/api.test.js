@@ -102,6 +102,11 @@ test("loan comparison, tax, insurance, readiness, pricing endpoints", async () =
   assert.ok(["GO", "NOT YET", "NO"].includes(ready.json.verdict));
   const price = await api("POST", "/api/finance/pricing", { unitCost: 20, marketHigh: 55, marketLow: 32, units: 50 });
   assert.equal(price.json.listPrice, 55);
+  const econ = await api("POST", "/api/finance/unit-economics", { price: 40, unitCost: 18, fixedCosts: 2200, units: 200 });
+  assert.equal(econ.status, 200);
+  assert.equal(econ.json.breakEvenUnits, 100);
+  const missing = await api("POST", "/api/finance/unit-economics", {});
+  assert.equal(missing.status, 400);
 });
 
 test("documents prepare to signature", async () => {

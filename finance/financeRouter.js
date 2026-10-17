@@ -113,6 +113,10 @@ router.post("/retirement", (req, res) => {
 router.post("/education", (req, res) => res.json(calc.educationProjection(req.body || {})));
 router.post("/move-readiness", wrap(async (req, res) => res.json(await tools.run("move_readiness", req.body, { userId: uid(req) }))));
 router.post("/pricing", (req, res) => res.json(calc.pricingPlan(req.body || {})));
+router.post("/unit-economics", (req, res) => {
+  if (req.body == null || req.body.price == null) return res.status(400).json({ message: "price is required" });
+  res.json(calc.unitEconomics(req.body));
+});
 
 // ---- documents (to the signature line) ----
 router.get("/documents/templates", (req, res) => res.json(Object.entries(forms.TEMPLATES).map(([kind, t]) => ({ kind, title: t.title, fields: t.fields, signatures: t.signatures }))));

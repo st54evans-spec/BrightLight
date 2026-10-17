@@ -94,6 +94,36 @@ test("moveReadiness gives GO when numbers back it and NO when they do not", () =
   assert.ok(no.whatWouldMakeItGo.length >= 3);
 });
 
+test("unit economics: break-even, a cheaper price, and marketing saturation", () => {
+  const base = calc.unitEconomics({ price: 40, unitCost: 18, fixedCosts: 2200, units: 200 });
+  assert.equal(base.contributionMarginPerUnit, 22);
+  assert.equal(base.breakEvenUnits, 100);
+  assert.equal(base.breakEvenRevenue, 4000);
+  assert.equal(base.profit, 2200);
+  assert.ok(base.explanation.some((line) => /contribution margin/.test(line)));
+
+  const cut = calc.unitEconomics({ price: 40, unitCost: 18, fixedCosts: 2200, units: 200, alternatePrice: 32, alternateUnits: 300 });
+  assert.equal(cut.priceCut.contributionMarginPerUnit, 14);
+  assert.equal(cut.priceCut.unitsToMatchCurrentProfit, 314.29);
+  assert.equal(cut.priceCut.paysOff, false);
+  const enough = calc.unitEconomics({ price: 40, unitCost: 18, fixedCosts: 2200, units: 200, alternatePrice: 32, alternateUnits: 320 });
+  assert.equal(enough.priceCut.paysOff, true);
+
+  const ads = calc.unitEconomics({
+    price: 40,
+    unitCost: 18,
+    fixedCosts: 2200,
+    marketingSpend: 500,
+    saturationUnits: 100,
+    saturationSpend: 500,
+  });
+  const extra = 100 * (1 - Math.exp(-1));
+  assert.equal(ads.marketing.extraUnitsAtSpend, Math.round(extra * 100) / 100);
+  assert.equal(ads.marketing.paysOff, extra * 22 >= 500);
+  assert.ok(ads.marketing.spendWhereNextDollarStopsPaying > 500);
+  assert.equal(calc.unitEconomics({ price: 10, unitCost: 12 }).ok, false);
+});
+
 test("pricingPlan never drops below floor and starts at list", () => {
   const p = calc.pricingPlan({ unitCost: 18, marketLow: 30, marketHigh: 48, units: 40, mustSellByDays: 30 });
   assert.equal(p.listPrice, 48);

@@ -17,6 +17,7 @@ Rename him with `FINANCE_BOT_NAME`.
 | All financial data | Accounts + transactions (manual or Plaid sync); pie, line, bar chart data | `finance/reports.js`, `GET /api/finance/reports/summary` |
 | STOiiiC FiT move readiness | GO / NOT YET / NO on margin, runway after the move, DSCR, payback, cash | `calculators.moveReadiness` |
 | Top dollar when it must sell | List, floor, break-even, and a dated drop schedule | `calculators.pricingPlan` |
+| Break-even and unit economics | Fixed costs divided by contribution margin per unit; a lower price versus the volume it needs; marketing spend up to saturation | `calculators.unitEconomics`, `POST /api/finance/unit-economics` |
 | Investing, retirement, Brynlee's 529 | Projections, gap, extra monthly needed, allocation by horizon, NJBEST note | `calculators.retirementProjection`, `educationProjection` |
 | Life insurance | DIME sizing, term vs whole guidance, riders to ask for | `calculators.lifeInsuranceNeeds` |
 
@@ -37,7 +38,7 @@ REACT_APP_API_URL=http://localhost:3111 npm start
 Register, log in, open **Finance** in the nav bar (`/finance`). First click **Load tax + bill dates** on the calendar, then add accounts and a few transactions under **Charts** so the move-readiness and HELOC tools have real numbers.
 
 ```bash
-npm test                        # 27 tests: calculators, calendar, forms, PDF fill, Grok request shape, full API smoke
+npm test                        # 28 tests: calculators, calendar, forms, PDF fill, Grok request shape, full API smoke
 ```
 
 ## Database
@@ -76,7 +77,7 @@ GET  /reports/summary              pie, line, bar data + business snapshot
 GET  /lenders   POST /loans/compare {amount, termMonths, customLenders[]}   POST /loans/amortize
 POST /heloc {homeValue, firstMortgageBalance?, renovationBudget, helocRate, maxCLTV, debts?}
 POST /tax/estimate  POST /insurance/needs  POST /retirement  POST /education
-POST /move-readiness  POST /pricing
+POST /move-readiness  POST /pricing  POST /unit-economics {price, unitCost, fixedCosts, units, alternatePrice?, marketingSpend?}
 GET  /documents/templates  GET/POST /documents(/prepare)  PATCH /documents/:id  POST /documents/:id/fill-pdf {pdfBase64, fieldMap?}
 GET  /credit   POST /credit/pull {consent:true}   POST /credit/upload {bureau, score, report}
 POST /plaid/link-token  /plaid/exchange  /plaid/sync
