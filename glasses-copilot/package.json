@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test test/*.test.js",
+    "serve": "tsx src/server-main.ts",
     "start": "tsx src/mentra-app.ts"
   },
   "engines": {

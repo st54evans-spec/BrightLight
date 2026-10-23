@@ -35,18 +35,30 @@ your voice ─▶ [glasses SDK] ─▶ onUtterance(text)
 - `src/brain.ts` — provider calls over plain `fetch`. No SDKs, no Meta. **Portable.**
 - `src/router.ts` — pure routing logic. **Unit-tested.**
 - `src/copilot.ts` — the loop, written against a tiny `GlassesRuntime` interface.
-- `src/mentra-app.ts` — the glasses-specific seam (MentraOS). The **only** part
-  tied to a device SDK.
+- `src/server.ts` — HTTP `/ask` bridge a native Ray-Ban Meta app calls. **Tested.**
+- `src/mentra-app.ts` — the glasses seam for the MentraOS path.
 
-## Why MentraOS as the default
+## On Ray-Ban Meta (Wayfarer Gen 2 & Gen 3) — see [META.md](./META.md)
 
-MentraOS (open-source, MIT, `@mentra/sdk`) runs on Mentra Live and other glasses,
-owns its own wake behavior, and keeps Meta AI entirely out of the loop — the
-closest match to "just call them up without opening an app." If you're on
-Ray-Ban/Oakley Meta instead, keep `brain/router/copilot` as-is and replace
-`mentra-app.ts` with a Meta **Wearables Device Access Toolkit** adapter (note:
-Meta owns the "Hey Meta" wake word and requires one-time registration in the Meta
-AI app; your trigger becomes a tap / action button).
+Meta's glasses SDK is native-only, so the device half is a small Swift/Kotlin app
+that uses the glasses for mic/camera/speaker and calls the TypeScript brain bridge
+(`npm run serve`). Confirmed working on Gen 2 **and** Gen 3 (DAT 1.0.1+, firmware
+V128, Meta AI app V292).
+
+- Hands-free entry: **"Hey Meta, start Copilot …"** cold-launches your app with the
+  spoken text. That's the only hands-free hook Meta allows.
+- Grab **one photo** per visual question (keeps the HFP mic working).
+- **Not possible on Meta hardware (for anyone):** custom wake words, disabling
+  "Hey Meta", changing the recording LED or privacy settings, Meta AI APIs, or raw
+  mic streams. The toolkit is a sandboxed session the wearer can pause anytime.
+
+## Two hardware paths
+
+- **Ray-Ban Meta (Gen 2 / Gen 3):** native Swift/Kotlin app + the brain bridge.
+  See [META.md](./META.md). This is the path if you own the Wayfarers.
+- **MentraOS / Mentra Live:** open-source (`@mentra/sdk`), owns its own wake word,
+  no Meta app at all — the only way to get custom wake words and fuller control.
+  Use `src/mentra-app.ts`.
 
 ## Run
 
