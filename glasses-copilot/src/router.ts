@@ -32,6 +32,11 @@ const VISION_HINTS = [
   /\bany idea what (this|that|it) is\b/i,
 ];
 
+/** True when a question refers to the wearer's surroundings (so grab a frame). */
+export function detectVision(text: string): boolean {
+  return VISION_HINTS.some((re) => re.test(text));
+}
+
 export function route(transcript: string, defaultBot: Bot): RouteResult {
   let bot = defaultBot;
   let prompt = transcript.trim();
@@ -44,6 +49,5 @@ export function route(transcript: string, defaultBot: Bot): RouteResult {
     }
   }
 
-  const wantsVision = VISION_HINTS.some((re) => re.test(prompt));
-  return { bot, prompt, wantsVision };
+  return { bot, prompt, wantsVision: detectVision(prompt) };
 }

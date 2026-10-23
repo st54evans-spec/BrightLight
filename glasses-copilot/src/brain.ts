@@ -13,6 +13,8 @@ export interface AskOptions {
   imageBase64?: string;
   /** Prior turns for follow-up questions, oldest first. */
   history?: Turn[];
+  /** Persona/instructions for this crew member (its "voice"). */
+  systemPrompt?: string;
   signal?: AbortSignal;
 }
 
@@ -56,6 +58,13 @@ export function createBrain(config: BrainConfig) {
       { role: "user", content: userContent },
     ];
 
+    const body: Record<string, unknown> = {
+      model: claudeModel,
+      max_tokens: maxTokens,
+      messages,
+    };
+    if (opts.systemPrompt) body.system = opts.systemPrompt;
+
     const res = await fetch(ANTHROPIC_URL, {
       method: "POST",
       signal: opts.signal,
@@ -64,7 +73,7 @@ export function createBrain(config: BrainConfig) {
         "x-api-key": config.anthropicApiKey,
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify({ model: claudeModel, max_tokens: maxTokens, messages }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) throw new Error(`Claude ${res.status}: ${await res.text()}`);
     const data = (await res.json()) as { content: Array<{ type: string; text?: string }> };
@@ -84,6 +93,7 @@ export function createBrain(config: BrainConfig) {
       });
     }
     const messages = [
+      ...(opts.systemPrompt ? [{ role: "system", content: opts.systemPrompt }] : []),
       ...(opts.history ?? []).map((t) => ({
         role: t.role,
         content: t.text,

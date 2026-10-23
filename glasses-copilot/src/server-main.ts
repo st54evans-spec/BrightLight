@@ -3,11 +3,12 @@
  *   npm run serve
  */
 
-import { createBrain, type Bot } from "./brain.js";
+import { createBrain } from "./brain.js";
 import { createAskServer } from "./server.js";
+import { loadCrew } from "./load-crew.js";
 
-function env(name: string, fallback?: string): string {
-  const v = process.env[name] ?? fallback;
+function env(name: string): string {
+  const v = process.env[name];
   if (v === undefined) throw new Error(`Missing env var ${name}`);
   return v;
 }
@@ -19,10 +20,11 @@ const brain = createBrain({
   grokModel: process.env.GROK_MODEL,
 });
 
+const crew = loadCrew();
 const port = Number(process.env.PORT ?? 3200);
-const defaultBot = env("DEFAULT_BOT", "claude") as Bot;
 
-createAskServer(brain, { defaultBot }).listen(port, () => {
+createAskServer(brain, { crew }).listen(port, () => {
   console.log(`glasses-copilot brain bridge listening on http://localhost:${port}`);
-  console.log(`POST /ask  { "text": "any idea what this is", "imageBase64": "..." }`);
+  console.log(`GET  /crew   roster + greetings`);
+  console.log(`POST /ask    { "text": "scout any idea what this is", "imageBase64": "..." }`);
 });
