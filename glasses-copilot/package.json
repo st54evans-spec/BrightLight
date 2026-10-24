@@ -1,0 +1,22 @@
+{
+  "name": "glasses-copilot",
+  "version": "0.1.0",
+  "description": "Hands-free voice+vision copilot for smart glasses that routes to your own Claude and Grok accounts.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/*.test.js",
+    "serve": "tsx src/server-main.ts",
+    "start": "tsx src/mentra-app.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
