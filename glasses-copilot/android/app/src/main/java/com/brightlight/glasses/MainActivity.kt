@@ -1,7 +1,10 @@
 package com.brightlight.glasses
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,8 +28,22 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        status = TextView(this).apply { text = "Starting…" }
-        setContentView(status)
+        val pad = (16 * resources.displayMetrics.density).toInt()
+        status = TextView(this).apply { text = "Starting…"; textSize = 16f }
+        val root = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(pad, pad, pad, pad)
+            addView(status)
+            addView(Button(context).apply {
+                text = "Test on phone (push to talk)"
+                setOnClickListener { startActivity(Intent(context, PushToTalkActivity::class.java)) }
+            })
+            addView(Button(context).apply {
+                text = "Settings (bridge URL)"
+                setOnClickListener { startActivity(Intent(context, SettingsActivity::class.java)) }
+            })
+        }
+        setContentView(root)
 
         permissions.launch(
             arrayOf(
@@ -35,8 +52,8 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        // The bridge URL (your `npm run serve`). Put it in BuildConfig or settings.
-        val bridge = BridgeClient(BuildConfig.BRIDGE_URL)
+        // Bridge URL comes from Settings (falls back to BuildConfig.BRIDGE_URL).
+        val bridge = BridgeClient(Settings(this).bridgeUrl)
         glasses = MetaGlasses(this)
         copilot = CopilotController(glasses, bridge)
 

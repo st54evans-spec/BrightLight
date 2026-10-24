@@ -25,14 +25,33 @@ greets you in Scout's voice, then Scout answers.
 - `Glasses.kt` — the device interface the loop depends on. **Complete.**
 - `MetaGlasses.kt` — the **DAT seam**: register, voice invocation, photo capture,
   TTS. The marked blocks are where the installed SDK's calls go.
-- `MainActivity.kt` — permissions + wiring.
+- `MainActivity.kt` — permissions + wiring; buttons to the two screens below.
+- `SettingsActivity.kt` + `Settings.kt` — bridge URL, saved on the phone, with a
+  **Test connection** button that lists your crew and their greetings. API keys are
+  not here on purpose: they stay in the bridge's `.env`.
+- `PushToTalkActivity.kt` + `PhoneGlasses.kt` + `SpeechInput.kt` — **phone test
+  bench.** Runs the same `CopilotController`, but with the phone's mic (Android
+  `SpeechRecognizer`), speaker (TTS) and camera standing in for the glasses, so you
+  can test the whole loop today without the DAT SDK wired. **Complete.**
 
-## Build
+## Test on the phone first
+
+1. Start the bridge: in `glasses-copilot/`, `npm run serve`.
+2. Install the app, open **Settings**, enter `http://<computer-LAN-ip>:3200`, tap
+   **Test connection** — you should see Claude, Scout, Cato Ledger and their lines.
+3. Open **Test on phone**. Tap and say (or type):
+   - "Hey Scout" → Scout's greeting
+   - "Cato, what's the margin on a $40 item that costs $25" → Cato Ledger (Grok)
+   - "Claude, any idea what this is?" → phone camera opens, snap, Claude answers
+   Everything is spoken back and logged on screen.
+
+## Build for the glasses
 
 1. Start the bridge on your computer: in `glasses-copilot/`, `npm run serve`.
    Note your LAN IP (e.g. `192.168.1.20`).
-2. Set `BRIDGE_URL` in `app/build.gradle.kts`:
-   - Emulator → `http://10.0.2.2:3200` (already set)
+2. Set the bridge URL in the app's **Settings** screen (or the `BRIDGE_URL` default
+   in `app/build.gradle.kts`):
+   - Emulator → `http://10.0.2.2:3200` (already the default)
    - Real phone → `http://<your-computer-LAN-ip>:3200`
 3. Add the DAT SDK: uncomment the `com.meta.wearables.dat:*` deps in
    `app/build.gradle.kts` (add Meta's Maven repo in `settings.gradle.kts` if

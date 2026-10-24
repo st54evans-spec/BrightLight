@@ -1,10 +1,6 @@
 package com.brightlight.glasses
 
 import android.content.Context
-import android.speech.tts.TextToSpeech
-import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.Locale
-import kotlin.coroutines.resume
 
 /**
  * MetaGlasses — Meta Wearables Device Access Toolkit implementation of [Glasses].
@@ -20,13 +16,9 @@ import kotlin.coroutines.resume
  */
 class MetaGlasses(private val context: Context) : Glasses {
 
-    private val tts = TextToSpeech(context) { }
+    private val tts = TtsSpeaker(context)
     // private val wearables = Wearables.init(context, BuildConfig.META_PACKAGE_NAME)
     // private var session: DeviceSession? = null
-
-    init {
-        tts.language = Locale.US
-    }
 
     override suspend fun register() {
         // === DAT seam ===
@@ -59,18 +51,12 @@ class MetaGlasses(private val context: Context) : Glasses {
         throw NotImplementedError("Wire camera.capturePhoto() from the installed DAT SDK")
     }
 
-    override suspend fun speak(text: String): Unit = suspendCancellableCoroutine { cont ->
-        // Android TTS routes to the glasses over A2DP when they are the active
-        // output device. (If an HFP mic session is open, release it first so the
-        // speaker isn't stuck at mono voice quality.)
-        val id = "copilot-${System.nanoTime()}"
-        tts.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
-            override fun onStart(utteranceId: String?) {}
-            override fun onDone(utteranceId: String?) { if (cont.isActive) cont.resume(Unit) }
-            @Deprecated("deprecated in API 21") override fun onError(utteranceId: String?) { if (cont.isActive) cont.resume(Unit) }
-        })
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, id)
+    override suspend fun speak(text: String) {
+        // TTS routes to the glasses over A2DP when they're the active output. (If
+        // an HFP mic session is open, release it first so the speaker isn't stuck
+        // at mono voice quality.)
+        tts.speak(text)
     }
 
-    fun shutdown() { tts.shutdown() }
+    fun shutdown() = tts.shutdown()
 }
