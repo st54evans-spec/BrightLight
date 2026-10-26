@@ -45,6 +45,23 @@ greets you in Scout's voice, then Scout answers.
    - "Claude, any idea what this is?" → phone camera opens, snap, Claude answers
    Everything is spoken back and logged on screen.
 
+## Compile
+
+The Android SDK is a separate install from the Kotlin source. Android Studio
+includes it. On a machine that only has Java 17+, `scripts/install-sdk.sh`
+installs the command-line SDK (platform 35 and build-tools) under
+`/opt/android-sdk`.
+
+```bash
+export ANDROID_HOME=/opt/android-sdk   # or wherever the SDK landed
+cd glasses-copilot/android
+printf 'sdk.dir=%s\n' "$ANDROID_HOME" > local.properties   # not committed
+./gradlew assembleDebug
+```
+
+The debug APK is `app/build/outputs/apk/debug/app-debug.apk`. `local.properties`
+is gitignored because the SDK path differs per machine.
+
 ## Build for the glasses
 
 1. Start the bridge on your computer: in `glasses-copilot/`, `npm run serve`.
@@ -66,7 +83,8 @@ greets you in Scout's voice, then Scout answers.
 ## Honest status
 
 The bridge-facing half (HTTP, the loop, crew/greetings, personas) is complete and
-covered by tests in the parent project. The `MetaGlasses.kt` SDK calls are stubbed
+covered by tests in the parent project. `./gradlew assembleDebug` compiles the
+phone app (settings screen and push-to-talk bench included). The `MetaGlasses.kt` SDK calls are stubbed
 and clearly marked — they're the one part to wire against the DAT version you
 install, because Meta's symbol names shift between releases. The structure (lifecycle
 order, single-photo-to-protect-HFP, answer-once voice invocations, A2DP TTS) follows
