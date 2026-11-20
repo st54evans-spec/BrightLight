@@ -45,3 +45,10 @@ Right now every grading point counts the same when matching. The next step is to
 which grading points and pairings actually move results against the line (for example,
 tackle vs edge rusher may matter far more than safety tackles), and to search for the
 specific spots where twins and the line disagree most.
+
+## Update: twins weighted by what matters (2023-2026, 917 games)
+
+Weighting each grading point by how much it lined up with results in 2018-2022 did not help.
+Following the twins when at least 12 of 20 agreed covered 50.1% (475 games); unweighted, 51.1%.
+The same player-level grades fed to a boosted-tree model did better: 54.2% on the same unseen
+games. See [WHAT_MATTERS.md](WHAT_MATTERS.md).

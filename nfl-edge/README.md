@@ -17,6 +17,8 @@ python src/backtest_twins.py 2018    # walk-forward test of twins vs the line
 python src/dst_travel_test.py   # daylight saving travel test
 python src/history.py           # 1970-now classic grades (QB/RB/WR/TE + defense allowed)
 python src/classic_twins.py 2026_13_SF_NYG   # twins from every game since 1970
+python src/learn_weights.py     # which grading points matter against the line (train 2018-22, test 2023-26)
+python src/predict_upcoming.py  # leans for unplayed games
 ```
 
 ## How it fits together

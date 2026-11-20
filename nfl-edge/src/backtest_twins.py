@@ -8,9 +8,12 @@ target game's own result is used to find its twins.
 import os, sys
 import numpy as np
 import pandas as pd
+import twins
 from twins import load, whole_game, ROOT
 
-def main(first=2022):
+def main(first=2022, weighted=False):
+    if weighted:
+        twins.use_learned_weights()
     c = load()
     games = c[(c.season >= first) & c.off_points.notna() & (c.game_type == "REG") & (c.off_home == 1)]
     games = games.sort_values("gd").drop_duplicates("game_id")
@@ -33,9 +36,9 @@ def main(first=2022):
         if i % 100 == 0:
             print(i, gid, file=sys.stderr)
     r = pd.DataFrame(rows)
-    out = os.path.join(ROOT, "results", "backtest_twins.csv")
+    out = os.path.join(ROOT, "results", "backtest_twins_weighted.csv" if weighted else "backtest_twins.csv")
     r.to_csv(out, index=False)
     print(out)
 
 if __name__ == "__main__":
-    main(int(sys.argv[1]) if len(sys.argv) > 1 else 2022)
+    main(int(sys.argv[1]) if len(sys.argv) > 1 else 2022, "--weighted" in sys.argv)

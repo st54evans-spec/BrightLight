@@ -77,6 +77,16 @@ def upcoming_cell(c, gid):
     return rows
 
 
+WEIGHTS = None
+
+
+def use_learned_weights():
+    """Weight each grading point by how much it lined up with results in 2018-2022 (see learn_weights.py)."""
+    global WEIGHTS
+    w = pd.read_csv(os.path.join(PROC, "feature_weights.csv"))
+    WEIGHTS = dict(zip(w.feature, w.weight))
+
+
 def dist(target, pool, feats, setting=False):
     if setting:
         cols = [f for f, _ in feats]
@@ -90,7 +100,13 @@ def dist(target, pool, feats, setting=False):
     have = ~np.isnan(d)
     need = (~np.isnan(t)).sum()
     cover = have.sum(1) / max(need, 1)
-    out = np.where(cover >= 0.5, np.nanmean(np.where(have, np.minimum(d, 1), np.nan), axis=1), np.nan)
+    if WEIGHTS is not None and not setting:
+        w = np.array([WEIGHTS.get(f, 0.0) for f in cols]) + 1e-3
+        dd = np.where(have, np.minimum(d, 1), 0) * w
+        mean = dd.sum(1) / np.where(have, w, 0).sum(1).clip(1e-9)
+    else:
+        mean = np.nanmean(np.where(have, np.minimum(d, 1), np.nan), axis=1)
+    out = np.where(cover >= 0.5, mean, np.nan)
     return pd.Series(out, index=pool.index), need
 
 
