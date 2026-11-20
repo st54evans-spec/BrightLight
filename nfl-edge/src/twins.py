@@ -119,13 +119,32 @@ def cell_lines(target, pool, cell, feats, n=15):
     return lines, need
 
 
+_INJ = None
+
+
+def injury_tag(name, season, week):
+    """Latest injury report status for a player name in that season, up to that week."""
+    global _INJ
+    if _INJ is None:
+        import glob
+        f = os.path.join(ROOT, "data/raw/injuries")
+        _INJ = pd.concat([pd.read_csv(x) for x in glob.glob(f + "/*.csv")], ignore_index=True)
+    if not isinstance(name, str):
+        return ""
+    x = _INJ[(_INJ.season == season) & (_INJ.week <= week) & (_INJ.week >= week - 1) & (_INJ.full_name == name)]
+    if len(x) == 0:
+        return ""
+    st = x.sort_values("week").iloc[-1].report_status
+    return f" ({st.upper()})" if isinstance(st, str) else ""
+
+
 def matchup_table(r):
     pairs = [("QB1", "EDGE1", "under_pressure_epa", "pressure_rate"), ("OT1", "EDGE1", "unit_pressure_allowed", "pressure_rate"),
              ("OT2", "EDGE2", "unit_pressure_allowed", "pressure_rate"), ("WR1", "CB1", "epa_per_target", "yards_per_target"),
              ("WR2", "CB2", "epa_per_target", "yards_per_target"), ("WR3", "CB3", "epa_per_target", "yards_per_target"),
              ("TE1", "S1", "epa_per_target", "yards_per_target"), ("RB1", "LB1", "rush_epa", "tackles"),
              ("IOL1", "DL1", "unit_run_epa", "run_stop_tfl")]
-    lines = [f"**{r.offense} offense vs {r.defense} defense**", "",
+    lines = [f"**{r.offense} offense vs {r.defense} defense**" + (" (injury tags from the latest report)" if pd.isna(r.off_points) else ""), "",
              "| Offense player | Grade | Defense player | Grade | Edge |", "| --- | --- | --- | --- | --- |"]
     for o, dfn, ot, dt_ in pairs:
         on, ov = r.get(f"off_{o}_player_display_name"), r.get(f"off_{o}_{ot}")
@@ -134,7 +153,9 @@ def matchup_table(r):
             continue
         edge = "" if pd.isna(ov) or pd.isna(dv) else f"{ov - dv:+.0f}"
         f = lambda v: "" if pd.isna(v) else f"{v:.0f}"
-        lines.append(f"| {o} {on or ''} ({ot}) | {f(ov)} | {dfn} {dn or ''} ({dt_}) | {f(dv)} | {edge} |")
+        oi = injury_tag(on, r.season, r.week) if pd.isna(r.off_points) else ""
+        di = injury_tag(dn, r.season, r.week) if pd.isna(r.off_points) else ""
+        lines.append(f"| {o} {on or ''}{oi} ({ot}) | {f(ov)} | {dfn} {dn or ''}{di} ({dt_}) | {f(dv)} | {edge} |")
     return lines + [""]
 
 
