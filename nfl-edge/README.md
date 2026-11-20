@@ -15,6 +15,8 @@ python src/matchups.py          # player-vs-player matchup cells for every game
 python src/twins.py 2026_13_SF_NYG   # twins for one game (or --all-upcoming)
 python src/backtest_twins.py 2018    # walk-forward test of twins vs the line
 python src/dst_travel_test.py   # daylight saving travel test
+python src/history.py           # 1970-now classic grades (QB/RB/WR/TE + defense allowed)
+python src/classic_twins.py 2026_13_SF_NYG   # twins from every game since 1970
 ```
 
 ## How it fits together
@@ -30,6 +32,10 @@ Grading points by position are defined in `src/grades.py` (`traits`). Data limit
 have individual snap and penalty data only from 2012; coverage, pressure and broken-tackle
 data start in 2018; charting (blitz, play action, drops, contested catches) in 2022.
 Game results, scores, weather and lines go back to 1966 in `data/raw/history`.
+Before 1999, per-game QB, RB, WR and TE logs back to 1970 come from Pro Football Reference
+scrapes published at github.com/jawkneemai/PFRWebScrape (copy them into
+`data/raw/history/pfr_logs`). No free source we can reach has defensive or line players
+before 1999, so older defenses are graded by what opposing offenses did against them.
 
 Data comes from [nflverse](https://github.com/nflverse): game results, schedule,
 stadium, weather and closing lines (`games.csv`), and play-by-play reduced to
