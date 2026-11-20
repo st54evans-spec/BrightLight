@@ -19,6 +19,8 @@ python src/history.py           # 1970-now classic grades (QB/RB/WR/TE + defense
 python src/classic_twins.py 2026_13_SF_NYG   # twins from every game since 1970
 python src/learn_weights.py     # which grading points matter against the line (train 2018-22, test 2023-26)
 python src/predict_upcoming.py  # leans for unplayed games
+python src/madden.py            # Madden 02-27 ratings, every player, every attribute, by season
+python src/madden_test.py       # Madden ratings in every matchup cell + test against the line (results/MADDEN.md)
 ```
 
 ## How it fits together

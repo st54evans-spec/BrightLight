@@ -44,7 +44,7 @@ DEF = {
     "S": (["S"], 2, "defense_snaps", ["yards_per_target", "rating_allowed", "ball_skills", "tackles",
                                         "missed_tackle_rate", "run_stop_tfl"]),
 }
-ID_COLS = ["player_display_name", "age", "exp_years"]
+ID_COLS = ["player_id", "player_display_name", "age", "exp_years"]
 
 
 def pick(gr, pg_usage, groups, n, usage, extra_filter=None):
