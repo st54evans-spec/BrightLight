@@ -18,3 +18,9 @@ per-team passing numbers per game. Raw data is not committed; the scripts rebuil
 ## Tests so far
 
 - [Daylight saving travel test](results/DST_TRAVEL.md)
+- Trip ledger: `python src/trip_ledger.py` writes every road game as its own row
+  (route, time zones, body-clock kickoff, clock change, rest, trip before, weather,
+  QBs, passing profiles, line, result) to `results/trip_ledger.csv`.
+- Game matches: `python src/find_matches.py SF NYG 2026-12-06` lists every past trip
+  that matches an upcoming game, layer by layer, one game per row. Examples in
+  [results/matches](results/matches).
