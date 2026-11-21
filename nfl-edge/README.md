@@ -22,6 +22,7 @@ python src/predict_upcoming.py  # leans for unplayed games
 python src/madden.py            # Madden 02-27 ratings, every player, every attribute, by season
 python src/madden_test.py       # Madden ratings in every matchup cell + test against the line (results/MADDEN.md)
 python src/madden_teams.py      # team Madden numbers per edition, every past game run on them, twins for unplayed games
+python src/this_week.py 2026 11 2026-11-21   # every game this week with its closest past games, one by one (results/THIS_WEEK.md)
 ```
 
 ## How it fits together
