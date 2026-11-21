@@ -21,6 +21,7 @@ python src/learn_weights.py     # which grading points matter against the line (
 python src/predict_upcoming.py  # leans for unplayed games
 python src/madden.py            # Madden 02-27 ratings, every player, every attribute, by season
 python src/madden_test.py       # Madden ratings in every matchup cell + test against the line (results/MADDEN.md)
+python src/madden_teams.py      # team Madden numbers per edition, every past game run on them, twins for unplayed games
 ```
 
 ## How it fits together
