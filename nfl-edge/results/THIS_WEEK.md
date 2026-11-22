@@ -7,23 +7,23 @@ Each past game is listed on its own, closest first. Closeness 100 = identical go
 | Game | Date | Home line | Player-by-player: closest 5 | Madden teams: closest 5 | Since 1970: closest 5 | Closest single past game |
 | --- | --- | --- | --- | --- | --- | --- |
 | JAX at NYG | 2026-11-22 | +6.0 | 81 | 82 | 86 | 1999-11-21 IND at PHI (Peyton Manning at Donovan McNabb), 44-17 |
-| TB at DET | 2026-11-22 | -6.0 | 81 | 78 | 81 | 2012-11-18 JAX at HOU (Chad Henne at Matt Schaub), 37-43 |
-| ARI at KC | 2026-11-22 | -16.5 | 81 | 71 | 84 | 2015-11-22 DEN at CHI (Brock Osweiler at Jay Cutler), 17-15 |
+| TB at DET | 2026-11-22 | -3.5 | 81 | 78 | 81 | 2012-11-18 JAX at HOU (Chad Henne at Matt Schaub), 37-43 |
+| ARI at KC | 2026-11-22 | -15.5 | 81 | 71 | 84 | 2015-11-22 DEN at CHI (Brock Osweiler at Jay Cutler), 17-15 |
 | BAL at CAR | 2026-11-22 | -3.0 | 81 | 77 | 86 | 2011-11-27 CLE at CIN (Colt McCoy at Andy Dalton), 20-23 |
 | CIN at WAS | 2026-11-23 | +6.0 | 81 | 71 | 87 | 2016-11-17 NO at CAR (Drew Brees at Cam Newton), 20-23 |
 | MIA at BUF | 2026-11-22 | -16.5 | 81 | 70 | 87 | 2009-11-15 CIN at PIT (Carson Palmer at Ben Roethlisberger), 18-12 |
 | NO at CHI | 2026-11-22 | -11.5 | 80 | 77 | 86 | 1999-11-14 IND at NYG (Peyton Manning at Kent Graham), 27-19 |
-| TEN at DAL | 2026-11-22 | -8.5 | 80 | 77 | 87 | 2010-11-28 TEN at HOU (Rusty Smith at Matt Schaub), 0-20 |
+| TEN at DAL | 2026-11-22 | -7.5 | 80 | 77 | 87 | 2010-11-28 TEN at HOU (Rusty Smith at Matt Schaub), 0-20 |
 | NYJ at LAC | 2026-11-22 | -3.0 | 79 | 81 | 80 | 2009-11-29 JAX at SF (David Garrard at Alex Smith), 3-20 |
 | LV at DEN | 2026-11-22 | -10.5 | 78 | 72 | 85 | 2010-11-07 MIA at BAL (Chad Henne at Joe Flacco), 10-26 |
-| PIT at PHI | 2026-11-22 | +4.5 | 78 | 78 | 87 | 2000-10-29 PHI at NYG (Donovan McNabb at Kerry Collins), 7-24 |
+| PIT at PHI | 2026-11-22 | +3.5 | 78 | 78 | 87 | 2000-10-29 PHI at NYG (Donovan McNabb at Kerry Collins), 7-24 |
 | MIN at SF | 2026-11-22 | -3.5 | 74 | 71 | 85 | 2009-11-29 PIT at BAL (Dennis Dixon at Joe Flacco), 17-20 |
 
 ---
 
 ## JAX at NYG, 2026-11-22 13:00 ET, week 11
 
-Home line +6.0, total 46.5. QBs going in: Trevor Lawrence at J.J. McCarthy. Roof: outdoors.
+Home line +6.0, total 45.5. QBs going in: Trevor Lawrence at J.J. McCarthy. Roof: outdoors.
 
 Madden 27 units (home/away): QB 78/87 RB 84/82 WR 80/82 TE 82/79 OL 80/77 DL 84/80 LB 80/79 DB 81/81
 
@@ -76,7 +76,7 @@ Madden 27 units (home/away): QB 78/87 RB 84/82 WR 80/82 TE 82/79 OL 80/77 DL 84/
 
 ## TB at DET, 2026-11-22 13:00 ET, week 11
 
-Home line -6.0, total 45.5. QBs going in: Baker Mayfield at Jared Goff. Roof: dome.
+Home line -3.5, total 47.5. QBs going in: Baker Mayfield at Jared Goff. Roof: dome.
 
 Madden 27 units (home/away): QB 88/80 RB 97/87 WR 85/78 TE 90/75 OL 80/82 DL 84/82 LB 78/76 DB 84/84
 
@@ -129,7 +129,7 @@ Madden 27 units (home/away): QB 88/80 RB 97/87 WR 85/78 TE 90/75 OL 80/82 DL 84/
 
 ## ARI at KC, 2026-11-22 13:00 ET, week 11
 
-Home line -16.5, total 40.5. QBs going in: Carson Beck at Patrick Mahomes. Roof: outdoors.
+Home line -15.5, total 40.5. QBs going in: Carson Beck at Patrick Mahomes. Roof: outdoors.
 
 Madden 27 units (home/away): QB 93/72 RB 95/82 WR 80/77 TE 93/99 OL 84/80 DL 82/78 LB 80/75 DB 80/80
 
@@ -182,7 +182,7 @@ Madden 27 units (home/away): QB 93/72 RB 95/82 WR 80/77 TE 93/99 OL 84/80 DL 82/
 
 ## BAL at CAR, 2026-11-22 13:00 ET, week 11
 
-Home line -3.0, total 43.5. QBs going in: Jacoby Brissett at Bryce Young. Roof: outdoors.
+Home line -3.0, total 44.5. QBs going in: Jacoby Brissett at Bryce Young. Roof: outdoors.
 
 Madden 27 units (home/away): QB 82/93 RB 85/94 WR 80/80 TE 81/86 OL 82/79 DL 82/85 LB 82/82 DB 81/86
 
@@ -235,7 +235,7 @@ Madden 27 units (home/away): QB 82/93 RB 85/94 WR 80/80 TE 81/86 OL 82/79 DL 82/
 
 ## CIN at WAS, 2026-11-23 20:15 ET, week 11
 
-Home line +6.0, total 53.5. QBs going in: Joe Burrow at Jayden Daniels. Roof: outdoors.
+Home line +6.0, total 54.5. QBs going in: Joe Burrow at Jayden Daniels. Roof: outdoors.
 
 Madden 27 units (home/away): QB 78/98 RB 80/84 WR 83/87 TE 74/80 OL 81/75 DL 80/84 LB 81/72 DB 79/80
 
@@ -394,7 +394,7 @@ Madden 27 units (home/away): QB 95/81 RB 89/84 WR 80/80 TE 82/80 OL 84/79 DL 83/
 
 ## TEN at DAL, 2026-11-22 13:00 ET, week 11
 
-Home line -8.5, total 55.5. QBs going in: Cam Ward at Dak Prescott. Roof: nan.
+Home line -7.5, total 54.5. QBs going in: Cam Ward at Dak Prescott. Roof: nan.
 
 Madden 27 units (home/away): QB 90/74 RB 85/85 WR 87/79 TE 77/72 OL 81/75 DL 81/78 LB 74/77 DB 83/79
 
@@ -553,7 +553,7 @@ Madden 27 units (home/away): QB 80/76 RB 80/84 WR 83/76 TE 78/96 OL 85/81 DL 85/
 
 ## PIT at PHI, 2026-11-22 16:25 ET, week 11
 
-Home line +4.5, total 38.5. QBs going in: Aaron Rodgers at Joe Milton III. Roof: outdoors.
+Home line +3.5, total 37.5. QBs going in: Aaron Rodgers at Joe Milton III. Roof: outdoors.
 
 Madden 27 units (home/away): QB 79/79 RB 91/87 WR 82/80 TE 89/79 OL 77/79 DL 84/89 LB 81/78 DB 83/85
 
