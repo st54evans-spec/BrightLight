@@ -74,7 +74,52 @@ def upcoming_cell(c, gid):
                         ("off_home", "off_rest", "def_rest", "off_coach", "def_coach", "off_points", "def_points",
                          "off_zones_travelled", "def_zones_travelled", "off_body_clock_hour", "def_body_clock_hour")]
                 rows.loc[i, cols] = last.iloc[0][cols].values
+        recent = played[(played.offense == r.offense) & (played.gd < r.gd)].sort_values("gd").tail(RECENT_GAMES)
+        for role, n, usage in USAGE_ROLES:
+            reslot(rows, i, recent, role, n, usage)
     return rows
+
+
+# Skill-position slots for an unplayed game: ranked by each player's actual volume over the team's
+# last few games, within his own position (WR with WRs, TE with TEs), not by one game or by rating
+RECENT_GAMES = 4
+USAGE_ROLES = [("WR", 3, "targets"), ("TE", 1, "targets"), ("RB", 1, "carries")]
+_PG = None
+
+
+def _usage():
+    global _PG
+    if _PG is None:
+        _PG = pd.read_parquet(os.path.join(PROC, "player_games.parquet"),
+                              columns=["game_id", "player_id", "team", "targets", "carries"])
+    return _PG
+
+
+def reslot(rows, i, recent, role, n, usage):
+    if recent.empty:
+        return
+    slots = sorted({int(x[len(f"off_{role}"):].split("_")[0]) for x in recent.columns
+                    if x.startswith(f"off_{role}") and x.endswith("_player_id")})
+    latest = {}                                   # player -> his slot fields from his most recent game
+    for _, g in recent.iterrows():
+        for k in slots:
+            pid = g.get(f"off_{role}{k}_player_id")
+            if pd.notna(pid):
+                pre = f"off_{role}{k}_"
+                latest[pid] = {x[len(pre):]: g[x] for x in recent.columns if x.startswith(pre)}
+    if not latest:
+        return
+    pg = _usage()
+    vol = pg[pg.game_id.isin(recent.game_id) & pg.player_id.isin(list(latest))].groupby("player_id")[usage].sum()
+    order = sorted(latest, key=lambda p: -float(vol.get(p, 0) or 0))[:n]
+    for k in slots:
+        for x in [c for c in rows.columns if c.startswith(f"off_{role}{k}_")]:
+            rows.loc[i, x] = np.nan
+    for k, pid in enumerate(order, 1):
+        for f, v in latest[pid].items():
+            col = f"off_{role}{k}_{f}"
+            if col in rows.columns:
+                rows.loc[i, col] = v
 
 
 WEIGHTS = None
