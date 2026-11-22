@@ -17,7 +17,22 @@ COLS = ["game_id", "season", "week", "posteam", "defteam", "pass", "rush",
 
 def fetch_games():
     os.makedirs(RAW, exist_ok=True)
-    urllib.request.urlretrieve(GAMES_URL, os.path.join(RAW, "games.csv"))
+    path = os.path.join(RAW, "games.csv")
+    urllib.request.urlretrieve(GAMES_URL, path)
+    apply_overrides(path)
+
+
+def apply_overrides(path):
+    """The nflverse schedule can lag kickoff-time changes (it had JAX at NYG, week 11 2026, at 1 PM when
+    it kicked at 4:25). schedule_overrides.csv holds corrections checked against a sportsbook."""
+    ov = os.path.join(ROOT, "schedule_overrides.csv")
+    if not os.path.exists(ov):
+        return
+    g = pd.read_csv(path)
+    o = pd.read_csv(ov, dtype=str).set_index("game_id")
+    hit = g.game_id.isin(o.index)
+    g.loc[hit, "gametime"] = g.loc[hit, "game_id"].map(o.gametime)
+    g.to_csv(path, index=False)
 
 
 def fetch_pbp(first=1999, last=2026):
