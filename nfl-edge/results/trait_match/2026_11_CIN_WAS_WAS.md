@@ -1,5 +1,5 @@
 # WAS offense vs CIN defense (2026_11_CIN_WAS)
-Attributes tonight: 126 of 131 have data. Each is checked on its own tolerance (Madden ratings within 5, production grades within 15, ages within 2-3 years, setting as listed). Games are ranked by how many attributes match. Nothing is averaged into one score.
+Attributes tonight: 138 of 143 have data. Each is checked on its own tolerance (Madden ratings within 5, production grades within 15, ages within 2-3 years, setting as listed). Games are ranked by how many attributes match. Nothing is averaged into one score.
 Tonight's setting: home, MNF, week 11, 54F, wind 8, offense rest 11 days, defense rest 8 days.
 
 ## Tonight's players: Madden card by edition (a season's card is set from the year before; the latest is the in-season update)
@@ -31,7 +31,7 @@ Tonight's setting: home, MNF, week 11, 54F, wind 8, offense rest 11 days, defens
 Ratings used for a past game are game-time: that season's launch card moved toward the next edition's card by the week of the game.
 
 # Closest on everything
-## 2024 week 15: CAR 14, DAL 30 (home, Sun day) -- matches 92 of 126 attributes that game has data for
+## 2024 week 15: CAR 14, DAL 30 (home, Sun day) -- matches 101 of 138 attributes that game has data for
 Offense: QB Bryce Young, RB Chuba Hubbard, WR Adam Thielen / Jalen Coker / David Moore, TE Tommy Tremble, LT Taylor Moton
 Defense: EDGE Chauncey Golston, DL Osa Odighizuwa, LB Eric Kendricks, CB DaRon Bland, S Malik Hooker
 
@@ -45,9 +45,11 @@ Stats from that game:
 - WR David Moore: rush 0 for 0, 0 TD | 4 targets, 2 for 19, 0 TD
 - TE Tommy Tremble: rush 0 for 0, 0 TD | 2 targets, 2 for 15, 0 TD
 - TE Ja'Tavion Sanders: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
+- Game flow, this offense: time of possession 26:14, 50 plays, 10 drives, 5.0 plays per drive, 31 sec per play, 3rd down 3/11, run rate 26%
+- Game flow, other team: time of possession 33:46, 68 plays, 11 drives, 6.2 plays per drive, 30 sec per play, 3rd down 6/12, run rate 57%
 - Defense allowed: pass 219, rush 60 on 16 carries, sacks 6, INT 2, fumbles lost 2
 
-Did NOT match (34), and what each could change tonight:
+Did NOT match (37), and what each could change tonight:
 - OL awareness: Tonight lower (77 vs 82.7). Worse for tonight's offense than that game: expect a worse offensive result on blitz pickup, penalties.
 - OL agility (pulling/screens): Tonight higher (67 vs 60.5). Better for tonight's offense than that game: expect a better offensive result on screens, outside runs.
 - QB awareness: Tonight lower (61 vs 75.7). Worse for tonight's offense than that game: expect a worse offensive result on INTs, sacks.
@@ -78,6 +80,9 @@ Did NOT match (34), and what each could change tonight:
 - LB missed tackles (higher = fewer misses): Tonight lower (44.7 vs 90.0). Better for tonight's offense than that game: expect a better offensive result on RB yards after contact.
 - CB yards per target (production): Tonight higher (56.3 vs 39.2). Worse for tonight's offense than that game: expect a worse offensive result on WR receiving yards.
 - Safety tackling: Tonight higher (87.6 vs 47.1). Worse for tonight's offense than that game: expect a worse offensive result on RB long runs.
+- Offense time of possession (min) (season so far): Tonight higher (30.2 vs 28.0).
+- Defense allowed: 3rd-down conversion rate (season so far): Tonight higher (0.47 vs 0.37).
+- Defense allowed: run rate (season so far): Tonight lower (0.36 vs 0.44).
 - Game slot (MNF / SNF / TNF / day): Tonight MNF, that game Sun day. Affects primetime performance.
 - Week of season: Tonight lower (11 vs 15).
 - Offense rest days: Tonight higher (11 vs 7).
@@ -201,6 +206,18 @@ Did NOT match (34), and what each could change tonight:
 | Safety tackling | 87.6 | 47.1 | no |
 | Defense age | 26.8 | 27.7 | YES |
 | Defense experience | 3.6 | 4.5 | YES |
+| Offense time of possession (min) (season so far) | 30.2 | 28.0 | no |
+| Offense offensive plays per game (season so far) | 61.8 | 58.7 | YES |
+| Offense pace (possession seconds per play) (season so far) | 29.3 | 28.8 | YES |
+| Offense 3rd-down conversion rate (season so far) | 0.33 | 0.34 | YES |
+| Offense run rate (season so far) | 0.36 | 0.37 | YES |
+| Offense plays per drive (season so far) | 5.4 | 5.3 | YES |
+| Defense allowed: time of possession (min) (season so far) | 29.7 | 31.0 | YES |
+| Defense allowed: offensive plays per game (season so far) | 61.1 | 61.2 | YES |
+| Defense allowed: pace (possession seconds per play) (season so far) | 29.5 | 30.5 | YES |
+| Defense allowed: 3rd-down conversion rate (season so far) | 0.47 | 0.37 | no |
+| Defense allowed: run rate (season so far) | 0.36 | 0.44 | no |
+| Defense allowed: plays per drive (season so far) | 5.8 | 5.1 | YES |
 | Home / away | 1 | 1 | YES |
 | Game slot (MNF / SNF / TNF / day) | MNF | Sun day | no |
 | Week of season | 11 | 15 | no |
@@ -221,401 +238,215 @@ Did NOT match (34), and what each could change tonight:
 
 </details>
 
-## 2023 week 9: PIT 20, TEN 16 (home, TNF) -- matches 90 of 126 attributes that game has data for
-Offense: QB Kenny Pickett, RB Najee Harris, WR Diontae Johnson / George Pickens / Allen Robinson, TE Darnell Washington, LT Dan Moore Jr.
-Defense: EDGE Arden Key, DL Jeffery Simmons, LB Azeez Al-Shaair, CB Kristian Fulton, S Amani Hooker
+## 2025 week 6: NYJ 11, DEN 13 (away, Sun day) -- matches 100 of 138 attributes that game has data for
+Offense: QB Justin Fields, RB Breece Hall, WR Garrett Wilson / Josh Reynolds / Tyler Johnson, TE Mason Taylor, LT Olumuyiwa Fashanu
+Defense: EDGE Zach Allen, DL D.J. Jones, LB Alex Singleton, CB Pat Surtain II, S Brandon Jones
 
 Stats from that game:
-- QB Kenny Pickett: 19/30, 160 yds, 1 TD, 0 INT, sacked 0, rush 1 for -1
-- RB Najee Harris: rush 16 for 69, 1 TD | 4 targets, 2 for 7, 0 TD
-- RB Jaylen Warren: rush 11 for 88, 0 TD | 3 targets, 3 for 25, 0 TD
-- WR Calvin Austin III: rush 2 for 10, 0 TD | 1 targets, 0 for 0, 0 TD
-- WR Diontae Johnson: rush 0 for 0, 0 TD | 9 targets, 7 for 90, 1 TD
-- WR George Pickens: rush 0 for 0, 0 TD | 5 targets, 2 for -1, 0 TD
-- WR Allen Robinson: rush 0 for 0, 0 TD | 2 targets, 1 for 10, 0 TD
-- WR Miles Boykin: rush 0 for 0, 0 TD | 1 targets, 1 for 6, 0 TD
-- TE Darnell Washington: rush 0 for 0, 0 TD | 1 targets, 1 for 7, 0 TD
-- Defense allowed: pass 160, rush 166 on 30 carries, sacks 0, INT 0, fumbles lost 0
+- QB Justin Fields: 9/17, 45 yds, 0 TD, 0 INT, sacked 9, rush 7 for 31
+- RB Breece Hall: rush 22 for 59, 0 TD | 0 targets, 0 for 0, 0 TD
+- RB Isaiah Davis: rush 2 for 2, 0 TD | 1 targets, 1 for -1, 0 TD
+- WR Garrett Wilson: rush 0 for 0, 0 TD | 8 targets, 3 for 13, 0 TD
+- WR Josh Reynolds: rush 0 for 0, 0 TD | 3 targets, 3 for 25, 0 TD
+- WR Tyler Johnson: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
+- WR Arian Smith: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
+- TE Mason Taylor: rush 0 for 0, 0 TD | 1 targets, 1 for 2, 0 TD
+- Game flow, this offense: time of possession 27:16, 57 plays, 12 drives, 4.8 plays per drive, 29 sec per play, 3rd down 2/15, run rate 49%
+- Game flow, other team: time of possession 31:08, 55 plays, 12 drives, 4.6 plays per drive, 34 sec per play, 3rd down 5/15, run rate 40%
+- Defense allowed: pass 45, rush 92 on 31 carries, sacks 9, INT 0, fumbles lost 0
 
-Did NOT match (36), and what each could change tonight:
-- OL awareness: Tonight lower (77 vs 83). Worse for tonight's offense than that game: expect a worse offensive result on blitz pickup, penalties.
-- Tackles run blocking: Tonight higher (85 vs 74.5). Better for tonight's offense than that game: expect a better offensive result on outside runs.
-- QB speed: Tonight higher (91 vs 81). Better for tonight's offense than that game: expect a better offensive result on QB rushing yards.
-- QB awareness: Tonight lower (61 vs 73.5). Worse for tonight's offense than that game: expect a worse offensive result on INTs, sacks.
-- RB power (trucking): Tonight lower (76 vs 86). Worse for tonight's offense than that game: expect a worse offensive result on yards after contact, short yardage.
-- Edge speed-rush moves: Tonight lower (73.5 vs 79.5). Better for tonight's offense than that game: expect a better offensive result on sacks, QB under pressure.
-- Edge speed: Tonight higher (88.5 vs 79.5). Worse for tonight's offense than that game: expect a worse offensive result on sacks, QB scrambles contained.
-- CB man coverage: Tonight higher (79 vs 68.3). Worse for tonight's offense than that game: expect a worse offensive result on WR receiving yards.
-- CB press: Tonight higher (73 vs 66.5). Worse for tonight's offense than that game: expect a worse offensive result on WR releases, timing routes.
-- CB hands (INTs): Tonight higher (72.5 vs 63.3). Worse for tonight's offense than that game: expect a worse offensive result on interceptions.
-- OL holding penalties (higher = cleaner): Tonight lower (52.5 vs 80.2). Worse for tonight's offense than that game: expect a worse offensive result on drive-killing penalties.
-- OL false starts (higher = cleaner): Tonight lower (30.4 vs 67.0). Worse for tonight's offense than that game: expect a worse offensive result on penalties on the road.
-- QB passing (production): Tonight higher (50 vs 26.5). Better for tonight's offense than that game: expect a better offensive result on QB passing yards / TDs.
-- QB running (production): Tonight higher (80.7 vs 48.4). Better for tonight's offense than that game: expect a better offensive result on QB rushing yards.
-- QB under pressure: Tonight lower (43 vs 86.3). Worse for tonight's offense than that game: expect a worse offensive result on sacks, INTs.
-- QB in primetime: Tonight higher (67.8 vs 43.3). Better for tonight's offense than that game: expect a better offensive result on night-game passing.
-- RB running (production): Tonight higher (79 vs 22.5). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
-- RB run success rate: Tonight higher (66.1 vs 32.7). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
-- RB explosive runs: Tonight higher (61.5 vs 26.2). Better for tonight's offense than that game: expect a better offensive result on long runs.
-- RB age: Tonight higher (27.8 vs 25.6).
-- WR1 efficiency (production): Tonight higher (75.6 vs 25.6). Better for tonight's offense than that game: expect a better offensive result on WR1 receiving yards.
-- WR1 deep threat (production): Tonight higher (61.6 vs 1.9). Better for tonight's offense than that game: expect a better offensive result on WR1 big plays.
-- WR2 efficiency (one #1 or two): Tonight lower (39.6 vs 87.9). Worse for tonight's offense than that game: expect a worse offensive result on WR2 yards; coverage rolled to WR1.
-- WR1 age: Tonight higher (33.0 vs 27.3).
-- TE target share: Tonight higher (81.9 vs 48.7). Better for tonight's offense than that game: expect a better offensive result on TE targets.
-- TE snap share: Tonight higher (79.1 vs 54.2). Better for tonight's offense than that game: expect a better offensive result on TE involvement.
-- Edge pressure (production): Tonight lower (22.9 vs 76.4). Better for tonight's offense than that game: expect a better offensive result on sacks, QB passing.
-- Interior DL run stop (production): Tonight lower (48.4 vs 89.0). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
-- Safety tackling: Tonight higher (87.6 vs 65.7). Worse for tonight's offense than that game: expect a worse offensive result on RB long runs.
-- Game slot (MNF / SNF / TNF / day): Tonight MNF, that game TNF. Affects primetime performance.
-- Offense rest days: Tonight higher (11 vs 4).
-- Offense on a short week: Tonight 0, that game 1. Affects .
-- Defense rest days: Tonight higher (8 vs 4).
-- Defense on a short week: Tonight 0, that game 1. Affects .
-- Temperature (F): Tonight higher (54 vs 40).
-- WR carries (WR1-3 runs, prior 4 games): Tonight lower (0 vs 5). Worse for tonight's offense than that game: expect a worse offensive result on WR rushing, gadget plays.
+Did NOT match (38), and what each could change tonight:
+- OL strength: Tonight lower (83.8 vs 89.5). Worse for tonight's offense than that game: expect a worse offensive result on run game, power rush.
+- Tackles run blocking: Tonight higher (85 vs 79.3). Better for tonight's offense than that game: expect a better offensive result on outside runs.
+- Guards/center drive blocking: Tonight lower (74 vs 79.3). Worse for tonight's offense than that game: expect a worse offensive result on short yardage, inside runs.
+- QB mid accuracy: Tonight higher (85 vs 78.7). Better for tonight's offense than that game: expect a better offensive result on passing yards.
+- RB hands: Tonight higher (76 vs 69.7). Better for tonight's offense than that game: expect a better offensive result on RB receptions.
+- WR1 release vs press: Tonight higher (86 vs 78.3). Better for tonight's offense than that game: expect a better offensive result on WR1 vs press corners.
+- Edge power moves: Tonight lower (74 vs 79.8). Better for tonight's offense than that game: expect a better offensive result on sacks, pressure.
+- Edge speed: Tonight higher (88.5 vs 76.8). Worse for tonight's offense than that game: expect a worse offensive result on sacks, QB scrambles contained.
+- Interior DL power moves: Tonight higher (84 vs 72.2). Worse for tonight's offense than that game: expect a worse offensive result on interior pressure.
+- Interior DL block shedding: Tonight higher (84.5 vs 78.8). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
+- Interior DL strength: Tonight higher (92.5 vs 87.2). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
+- LB play recognition: Tonight lower (73 vs 79.7). Better for tonight's offense than that game: expect a better offensive result on play action, misdirection.
+- CB zone coverage: Tonight lower (75.5 vs 83.8). Better for tonight's offense than that game: expect a better offensive result on WR receiving yards.
+- CB press: Tonight lower (73 vs 79.3). Better for tonight's offense than that game: expect a better offensive result on WR releases, timing routes.
+- OL pressure allowed (production): Tonight higher (32.6 vs 14.2). Better for tonight's offense than that game: expect a better offensive result on pressure, QB passing.
+- OL run blocking (production): Tonight higher (45.9 vs 29). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
+- OL holding penalties (higher = cleaner): Tonight higher (52.5 vs 29.2). Better for tonight's offense than that game: expect a better offensive result on drive-killing penalties.
+- OL age: Tonight higher (27.1 vs 24.9).
+- QB passing (production): Tonight higher (50 vs 31.4). Better for tonight's offense than that game: expect a better offensive result on QB passing yards / TDs.
+- QB ball security: Tonight higher (99.4 vs 84). Better for tonight's offense than that game: expect a better offensive result on INTs, fumbles.
+- QB in primetime: Tonight higher (67.8 vs 52.7). Better for tonight's offense than that game: expect a better offensive result on night-game passing.
+- RB running (production): Tonight higher (79 vs 37.2). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
+- RB age: Tonight higher (27.8 vs 24.4).
+- WR1 efficiency (production): Tonight higher (75.6 vs 31.3). Better for tonight's offense than that game: expect a better offensive result on WR1 receiving yards.
+- WR1 deep threat (production): Tonight higher (61.6 vs 46). Better for tonight's offense than that game: expect a better offensive result on WR1 big plays.
+- WR2 target share: Tonight higher (65.2 vs 33.8). Better for tonight's offense than that game: expect a better offensive result on WR2 targets.
+- WR1 age: Tonight higher (33.0 vs 25.2).
+- TE efficiency (production): Tonight lower (14.4 vs 77). Worse for tonight's offense than that game: expect a worse offensive result on TE receiving yards.
+- Edge pressure (production): Tonight lower (22.9 vs 82.3). Better for tonight's offense than that game: expect a better offensive result on sacks, QB passing.
+- Interior DL pressure (production): Tonight lower (61.7 vs 77.7). Better for tonight's offense than that game: expect a better offensive result on sacks.
+- Interior DL run stop (production): Tonight lower (48.4 vs 66.4). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
+- LB tackles (production): Tonight higher (85.4 vs 66.7). Worse for tonight's offense than that game: expect a worse offensive result on RB yards.
+- Defense experience: Tonight lower (3.6 vs 5.4).
+- Defense allowed: 3rd-down conversion rate (season so far): Tonight higher (0.47 vs 0.29).
+- Home / away: Tonight 1, that game 0. Affects everything.
+- Game slot (MNF / SNF / TNF / day): Tonight MNF, that game Sun day. Affects primetime performance.
+- Week of season: Tonight higher (11 vs 6).
+- Offense rest days: Tonight higher (11 vs 7).
 
 <details><summary>Every attribute</summary>
 
 | Attribute | Tonight | That game | Match |
 |---|---|---|---|
-| OL pass blocking | 78.2 | 77.6 | YES |
-| OL pass block power (bull rush) | 79 | 78 | YES |
-| OL pass block finesse (speed rush) | 77.6 | 77 | YES |
-| OL run blocking | 79.6 | 76.2 | YES |
-| OL run block power (gap/drive) | 77.4 | 74.5 | YES |
-| OL run block finesse (zone) | 81 | 78.1 | YES |
-| OL impact blocking | 82.6 | 85.5 | YES |
-| OL strength | 83.8 | 84 | YES |
-| OL awareness | 77 | 83 | no |
-| OL agility (pulling/screens) | 67 | 68.5 | YES |
-| Tackles pass blocking | 81 | 76.5 | YES |
-| Tackles vs speed rush | 82.5 | 79.5 | YES |
-| Tackles run blocking | 85 | 74.5 | no |
-| Guards/center pass blocking | 76.3 | 78 | YES |
-| Guards/center vs bull rush | 79 | 79.5 | YES |
-| Guards/center run blocking | 76 | 76.8 | YES |
-| Guards/center drive blocking | 74 | 75 | YES |
-| Left tackle pass blocking (blind side) | 85 | 83 | YES |
+| OL pass blocking | 78.2 | 79.9 | YES |
+| OL pass block power (bull rush) | 79 | 81.7 | YES |
+| OL pass block finesse (speed rush) | 77.6 | 78.2 | YES |
+| OL run blocking | 79.6 | 79.5 | YES |
+| OL run block power (gap/drive) | 77.4 | 79.3 | YES |
+| OL run block finesse (zone) | 81 | 80.1 | YES |
+| OL impact blocking | 82.6 | 87.6 | YES |
+| OL strength | 83.8 | 89.5 | no |
+| OL awareness | 77 | 80.3 | YES |
+| OL agility (pulling/screens) | 67 | 62.3 | YES |
+| Tackles pass blocking | 81 | 83 | YES |
+| Tackles vs speed rush | 82.5 | 83 | YES |
+| Tackles run blocking | 85 | 79.3 | no |
+| Guards/center pass blocking | 76.3 | 77.9 | YES |
+| Guards/center vs bull rush | 79 | 80.2 | YES |
+| Guards/center run blocking | 76 | 79.7 | YES |
+| Guards/center drive blocking | 74 | 79.3 | no |
+| Left tackle pass blocking (blind side) | 85 | 84 | YES |
 | Center awareness (line calls) | 85 | 86 | YES |
-| QB arm strength | 92 | 87 | YES |
-| QB short accuracy | 86 | 87.5 | YES |
-| QB mid accuracy | 85 | 81.5 | YES |
-| QB deep accuracy | 79 | 79.5 | YES |
-| QB throwing on the run | 85 | 83 | YES |
-| QB speed | 91 | 81 | no |
-| QB awareness | 61 | 73.5 | no |
-| RB speed | 89 | 88 | YES |
+| QB arm strength | 92 | 91 | YES |
+| QB short accuracy | 86 | 83.7 | YES |
+| QB mid accuracy | 85 | 78.7 | no |
+| QB deep accuracy | 79 | 79 | YES |
+| QB throwing on the run | 85 | 80.3 | YES |
+| QB speed | 91 | 91.3 | YES |
+| QB awareness | 61 | 56 | YES |
+| RB speed | 89 | 92.7 | YES |
 | RB elusiveness | no data tonight |  | skip |
-| RB power (trucking) | 76 | 86 | no |
-| RB vision | 84 | 84.5 | YES |
-| RB ball security | 89 | 93 | YES |
-| RB hands | 76 | 72 | YES |
-| RB pass blocking | 58 | 55.5 | YES |
-| WR1 speed | 88 | 90 | YES |
-| WR1 hands | 89 | 86 | YES |
-| WR1 route running | 87 | 85 | YES |
-| WR1 release vs press | 86 | 85 | YES |
-| WR1 catch in traffic | 87 | 83 | YES |
-| WR2 speed | 92 | 90.5 | YES |
-| WR2 hands | 87 | 88.5 | YES |
-| WR run blocking (WR1-3) | 49 | 50 | YES |
+| RB power (trucking) | 76 | 80 | YES |
+| RB vision | 84 | 85 | YES |
+| RB ball security | 89 | 84.7 | YES |
+| RB hands | 76 | 69.7 | no |
+| RB pass blocking | 58 | 56.7 | YES |
+| WR1 speed | 88 | 92 | YES |
+| WR1 hands | 89 | 91 | YES |
+| WR1 route running | 87 | 85.4 | YES |
+| WR1 release vs press | 86 | 78.3 | no |
+| WR1 catch in traffic | 87 | 86.3 | YES |
+| WR2 speed | 92 | 88 | YES |
+| WR2 hands | 87 | 86 | YES |
+| WR run blocking (WR1-3) | 49 | 47.3 | YES |
 | TE hands | no data tonight |  | skip |
 | TE speed | no data tonight |  | skip |
 | TE run blocking | no data tonight |  | skip |
 | TE pass blocking | no data tonight |  | skip |
-| Edge speed-rush moves | 73.5 | 79.5 | no |
-| Edge power moves | 74 | 70 | YES |
-| Edge speed | 88.5 | 79.5 | no |
-| Interior DL power moves | 84 | 85.8 | YES |
-| Interior DL block shedding | 84.5 | 82.5 | YES |
-| Interior DL strength | 92.5 | 91.5 | YES |
-| DL tackling | 85 | 83.3 | YES |
-| LB tackling (Madden) | 83.5 | 84 | YES |
-| LB pursuit | 84 | 85.2 | YES |
-| LB play recognition | 73 | 77.8 | YES |
-| LB zone coverage | 65 | 64.5 | YES |
-| LB speed | 85.5 | 81.8 | YES |
-| CB man coverage | 79 | 68.3 | no |
-| CB zone coverage | 75.5 | 72.5 | YES |
-| CB press | 73 | 66.5 | no |
-| CB speed | 92.5 | 89.7 | YES |
-| CB hands (INTs) | 72.5 | 63.3 | no |
-| Safety zone coverage | 77 | 81.2 | YES |
-| Safety hit power | 84.5 | 83.5 | YES |
-| Safety speed | 88.5 | 89 | YES |
-| OL sacks allowed (production) | 40.0 | 41.3 | YES |
-| OL pressure allowed (production) | 32.6 | 21.6 | YES |
-| OL run blocking (production) | 45.9 | 57.7 | YES |
-| OL holding penalties (higher = cleaner) | 52.5 | 80.2 | no |
-| OL false starts (higher = cleaner) | 30.4 | 67.0 | no |
-| OL age | 27.1 | 26.3 | YES |
-| OL experience (years) | 3.8 | 3.8 | YES |
-| QB passing (production) | 50 | 26.5 | no |
-| QB running (production) | 80.7 | 48.4 | no |
-| QB under pressure | 43 | 86.3 | no |
-| QB deep passing (production) | 47.6 | 33.2 | YES |
-| QB on third down | 36.2 | 45 | YES |
-| QB ball security | 99.4 | 93.7 | YES |
-| QB in primetime | 67.8 | 43.3 | no |
-| QB age | 25.9 | 25.4 | YES |
-| QB experience (years) | 2 | 1 | YES |
-| RB running (production) | 79 | 22.5 | no |
-| RB run success rate | 66.1 | 32.7 | no |
-| RB explosive runs | 61.5 | 26.2 | no |
-| RB yards after contact (production) | 63.9 | 71.8 | YES |
-| RB pass catching (production) | 64.4 | 54.1 | YES |
-| RB age | 27.8 | 25.6 | no |
-| WR1 efficiency (production) | 75.6 | 25.6 | no |
-| WR1 target share | 84.7 | 93.2 | YES |
-| WR1 deep threat (production) | 61.6 | 1.9 | no |
-| WR1 yards after catch | 39.5 | 34.8 | YES |
-| WR2 efficiency (one #1 or two) | 39.6 | 87.9 | no |
-| WR2 target share | 65.2 | 77.9 | YES |
-| WR3 efficiency | 21.3 | 25.3 | YES |
-| WR1 age | 33.0 | 27.3 | no |
-| TE target share | 81.9 | 48.7 | no |
-| TE efficiency (production) | 14.4 | 18.3 | YES |
-| TE snap share | 79.1 | 54.2 | no |
-| Edge pressure (production) | 22.9 | 76.4 | no |
-| Edge sack rate | 56.0 | 58.7 | YES |
-| Interior DL pressure (production) | 61.7 | 64.3 | YES |
-| Interior DL run stop (production) | 48.4 | 89.0 | no |
-| Edge run stop (production) | 43.7 | 32 | YES |
-| LB tackles (production) | 85.4 | 90.8 | YES |
-| LB run stop (production) | 59.9 | 46.9 | YES |
-| LB missed tackles (higher = fewer misses) | 44.7 | 57.4 | YES |
-| LB coverage (production) | 37.0 | 40.1 | YES |
-| CB yards per target (production) | 56.3 | 47.4 | YES |
-| CB passer rating allowed | 53.3 | 39 | YES |
-| CB ball skills (production) | 67.5 | 53.8 | YES |
-| Safety ball skills | 64.7 | 55.3 | YES |
-| Safety tackling | 87.6 | 65.7 | no |
-| Defense age | 26.8 | 26.7 | YES |
-| Defense experience | 3.6 | 3.8 | YES |
-| Home / away | 1 | 1 | YES |
-| Game slot (MNF / SNF / TNF / day) | MNF | TNF | no |
-| Week of season | 11 | 9 | YES |
-| Offense rest days | 11 | 4 | no |
+| Edge speed-rush moves | 73.5 | 77.7 | YES |
+| Edge power moves | 74 | 79.8 | no |
+| Edge speed | 88.5 | 76.8 | no |
+| Interior DL power moves | 84 | 72.2 | no |
+| Interior DL block shedding | 84.5 | 78.8 | no |
+| Interior DL strength | 92.5 | 87.2 | no |
+| DL tackling | 85 | 83.1 | YES |
+| LB tackling (Madden) | 83.5 | 87.7 | YES |
+| LB pursuit | 84 | 87 | YES |
+| LB play recognition | 73 | 79.7 | no |
+| LB zone coverage | 65 | 67.2 | YES |
+| LB speed | 85.5 | 86.3 | YES |
+| CB man coverage | 79 | 82 | YES |
+| CB zone coverage | 75.5 | 83.8 | no |
+| CB press | 73 | 79.3 | no |
+| CB speed | 92.5 | 91.2 | YES |
+| CB hands (INTs) | 72.5 | 75.7 | YES |
+| Safety zone coverage | 77 | 81.3 | YES |
+| Safety hit power | 84.5 | 85 | YES |
+| Safety speed | 88.5 | 88.8 | YES |
+| OL sacks allowed (production) | 40.0 | 33.1 | YES |
+| OL pressure allowed (production) | 32.6 | 14.2 | no |
+| OL run blocking (production) | 45.9 | 29 | no |
+| OL holding penalties (higher = cleaner) | 52.5 | 29.2 | no |
+| OL false starts (higher = cleaner) | 30.4 | 43.9 | YES |
+| OL age | 27.1 | 24.9 | no |
+| OL experience (years) | 3.8 | 2.4 | YES |
+| QB passing (production) | 50 | 31.4 | no |
+| QB running (production) | 80.7 | 68.5 | YES |
+| QB under pressure | 43 | 38.4 | YES |
+| QB deep passing (production) | 47.6 | 52.1 | YES |
+| QB on third down | 36.2 | 32.1 | YES |
+| QB ball security | 99.4 | 84 | no |
+| QB in primetime | 67.8 | 52.7 | no |
+| QB age | 25.9 | 26.6 | YES |
+| QB experience (years) | 2 | 4 | YES |
+| RB running (production) | 79 | 37.2 | no |
+| RB run success rate | 66.1 | 57.5 | YES |
+| RB explosive runs | 61.5 | 75.8 | YES |
+| RB yards after contact (production) | 63.9 | 77.9 | YES |
+| RB pass catching (production) | 64.4 | 57.1 | YES |
+| RB age | 27.8 | 24.4 | no |
+| WR1 efficiency (production) | 75.6 | 31.3 | no |
+| WR1 target share | 84.7 | 95.2 | YES |
+| WR1 deep threat (production) | 61.6 | 46 | no |
+| WR1 yards after catch | 39.5 | 33.4 | YES |
+| WR2 efficiency (one #1 or two) | 39.6 | 49.5 | YES |
+| WR2 target share | 65.2 | 33.8 | no |
+| WR3 efficiency | 21.3 | 24.4 | YES |
+| WR1 age | 33.0 | 25.2 | no |
+| TE target share | 81.9 | 80.8 | YES |
+| TE efficiency (production) | 14.4 | 77 | no |
+| TE snap share | 79.1 | 85 | YES |
+| Edge pressure (production) | 22.9 | 82.3 | no |
+| Edge sack rate | 56.0 | 67.9 | YES |
+| Interior DL pressure (production) | 61.7 | 77.7 | no |
+| Interior DL run stop (production) | 48.4 | 66.4 | no |
+| Edge run stop (production) | 43.7 | 56.3 | YES |
+| LB tackles (production) | 85.4 | 66.7 | no |
+| LB run stop (production) | 59.9 | 50.7 | YES |
+| LB missed tackles (higher = fewer misses) | 44.7 | 48.9 | YES |
+| LB coverage (production) | 37.0 | 41.6 | YES |
+| CB yards per target (production) | 56.3 | 59.2 | YES |
+| CB passer rating allowed | 53.3 | 55.7 | YES |
+| CB ball skills (production) | 67.5 | 60.5 | YES |
+| Safety ball skills | 64.7 | 77.1 | YES |
+| Safety tackling | 87.6 | 90.8 | YES |
+| Defense age | 26.8 | 27.8 | YES |
+| Defense experience | 3.6 | 5.4 | no |
+| Offense time of possession (min) (season so far) | 30.2 | 29.6 | YES |
+| Offense offensive plays per game (season so far) | 61.8 | 60.6 | YES |
+| Offense pace (possession seconds per play) (season so far) | 29.3 | 29.2 | YES |
+| Offense 3rd-down conversion rate (season so far) | 0.33 | 0.33 | YES |
+| Offense run rate (season so far) | 0.36 | 0.36 | YES |
+| Offense plays per drive (season so far) | 5.4 | 5.5 | YES |
+| Defense allowed: time of possession (min) (season so far) | 29.7 | 28.9 | YES |
+| Defense allowed: offensive plays per game (season so far) | 61.1 | 59.6 | YES |
+| Defense allowed: pace (possession seconds per play) (season so far) | 29.5 | 29.3 | YES |
+| Defense allowed: 3rd-down conversion rate (season so far) | 0.47 | 0.29 | no |
+| Defense allowed: run rate (season so far) | 0.36 | 0.33 | YES |
+| Defense allowed: plays per drive (season so far) | 5.8 | 5.2 | YES |
+| Home / away | 1 | 0 | no |
+| Game slot (MNF / SNF / TNF / day) | MNF | Sun day | no |
+| Week of season | 11 | 6 | no |
+| Offense rest days | 11 | 7 | no |
 | Offense off a bye | 0 | 0 | YES |
-| Offense on a short week | 0 | 1 | no |
-| Defense rest days | 8 | 4 | no |
+| Offense on a short week | 0 | 0 | YES |
+| Defense rest days | 8 | 7 | YES |
 | Defense off a bye | 0 | 0 | YES |
-| Defense on a short week | 0 | 1 | no |
+| Defense on a short week | 0 | 0 | YES |
 | Time zones the offense travelled | 0 | 0 | YES |
-| Time zones the defense travelled | 0 | 1 | YES |
+| Time zones the defense travelled | 0 | 0 | YES |
 | Dome / outdoors | 0 | 0 | YES |
-| Temperature (F) | 54 | 40 | no |
-| Wind (mph) | 8 | 5 | YES |
+| Temperature (F) | 54 | 59 | YES |
+| Wind (mph) | 8 | 6 | YES |
 | Grass / turf | 1 | 1 | YES |
 | Division game | 0 | 0 | YES |
-| WR carries (WR1-3 runs, prior 4 games) | 0 | 5 | no |
+| WR carries (WR1-3 runs, prior 4 games) | 0 | 1 | YES |
 
 </details>
 
 # Closest with the same setting (MNF, home, week 9-13)
-## 2024 week 13: DEN 41, CLE 32 (home, MNF) -- matches 83 of 126 attributes that game has data for
-Offense: QB Bo Nix, RB Jaleel McLaughlin, WR Courtland Sutton / Troy Franklin / Marvin Mims Jr., TE Lucas Krull, LT Garett Bolles
-Defense: EDGE Dalvin Tomlinson, DL Maurice Hurst, LB Jordan Hicks, CB Martin Emerson, S Grant Delpit
-
-Stats from that game:
-- QB Bo Nix: 18/35, 294 yds, 1 TD, 2 INT, sacked 0, rush 3 for 4
-- RB Jaleel McLaughlin: rush 14 for 84, 0 TD | 2 targets, 1 for 0, 0 TD
-- RB Javonte Williams: rush 4 for 1, 1 TD | 2 targets, 1 for 3, 0 TD
-- RB Audric Estimé: rush 3 for 12, 0 TD | 0 targets, 0 for 0, 0 TD
-- WR Marvin Mims Jr.: rush 1 for 4, 0 TD | 4 targets, 3 for 105, 1 TD
-- WR Courtland Sutton: rush 0 for 0, 0 TD | 9 targets, 6 for 102, 0 TD
-- WR Troy Franklin: rush 0 for 0, 0 TD | 5 targets, 2 for 28, 0 TD
-- WR Devaughn Vele: rush 0 for 0, 0 TD | 4 targets, 1 for 16, 0 TD
-- TE Lucas Krull: rush 0 for 0, 0 TD | 3 targets, 3 for 24, 0 TD
-- TE Adam Trautman: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
-- TE Nate Adkins: rush 0 for 0, 0 TD | 1 targets, 1 for 16, 0 TD
-- Defense allowed: pass 294, rush 106 on 26 carries, sacks 0, INT 2, fumbles lost 0
-
-Did NOT match (43), and what each could change tonight:
-- OL awareness: Tonight lower (77 vs 87.2). Worse for tonight's offense than that game: expect a worse offensive result on blitz pickup, penalties.
-- Guards/center drive blocking: Tonight lower (74 vs 79.3). Worse for tonight's offense than that game: expect a worse offensive result on short yardage, inside runs.
-- QB awareness: Tonight lower (61 vs 76.3). Worse for tonight's offense than that game: expect a worse offensive result on INTs, sacks.
-- RB power (trucking): Tonight higher (76 vs 60). Better for tonight's offense than that game: expect a better offensive result on yards after contact, short yardage.
-- RB hands: Tonight higher (76 vs 70). Better for tonight's offense than that game: expect a better offensive result on RB receptions.
-- RB pass blocking: Tonight higher (58 vs 48). Better for tonight's offense than that game: expect a better offensive result on sacks, 3rd-down usage.
-- WR1 route running: Tonight higher (87 vs 80). Better for tonight's offense than that game: expect a better offensive result on WR1 targets/catches.
-- WR2 hands: Tonight higher (87 vs 80.7). Better for tonight's offense than that game: expect a better offensive result on WR2 catches.
-- Edge speed: Tonight higher (88.5 vs 72.5). Worse for tonight's offense than that game: expect a worse offensive result on sacks, QB scrambles contained.
-- Interior DL power moves: Tonight higher (84 vs 68). Worse for tonight's offense than that game: expect a worse offensive result on interior pressure.
-- Interior DL block shedding: Tonight higher (84.5 vs 74). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
-- CB man coverage: Tonight lower (79 vs 86.9). Better for tonight's offense than that game: expect a better offensive result on WR receiving yards.
-- CB zone coverage: Tonight lower (75.5 vs 83.2). Better for tonight's offense than that game: expect a better offensive result on WR receiving yards.
-- CB press: Tonight lower (73 vs 84). Better for tonight's offense than that game: expect a better offensive result on WR releases, timing routes.
-- Safety zone coverage: Tonight lower (77 vs 82.6). Better for tonight's offense than that game: expect a better offensive result on deep passes, TE seams.
-- OL sacks allowed (production): Tonight lower (40.0 vs 65.2). Worse for tonight's offense than that game: expect a worse offensive result on sacks.
-- OL false starts (higher = cleaner): Tonight lower (30.4 vs 55.4). Worse for tonight's offense than that game: expect a worse offensive result on penalties on the road.
-- QB running (production): Tonight higher (80.7 vs 65.6). Better for tonight's offense than that game: expect a better offensive result on QB rushing yards.
-- QB deep passing (production): Tonight higher (47.6 vs 26). Better for tonight's offense than that game: expect a better offensive result on big plays.
-- QB on third down: Tonight lower (36.2 vs 64.1). Worse for tonight's offense than that game: expect a worse offensive result on drives sustained.
-- QB in primetime: Tonight higher (67.8 vs 46.8). Better for tonight's offense than that game: expect a better offensive result on night-game passing.
-- RB run success rate: Tonight lower (66.1 vs 92.2). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
-- RB yards after contact (production): Tonight higher (63.9 vs 47.7). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
-- RB pass catching (production): Tonight higher (64.4 vs 25.4). Better for tonight's offense than that game: expect a better offensive result on RB receiving.
-- RB age: Tonight higher (27.8 vs 24.2).
-- WR1 yards after catch: Tonight higher (39.5 vs 2.2). Better for tonight's offense than that game: expect a better offensive result on WR1 yards.
-- WR2 efficiency (one #1 or two): Tonight higher (39.6 vs 7.6). Better for tonight's offense than that game: expect a better offensive result on WR2 yards; coverage rolled to WR1.
-- WR2 target share: Tonight higher (65.2 vs 38.5). Better for tonight's offense than that game: expect a better offensive result on WR2 targets.
-- WR1 age: Tonight higher (33.0 vs 29.1).
-- TE target share: Tonight higher (81.9 vs 40.6). Better for tonight's offense than that game: expect a better offensive result on TE targets.
-- TE efficiency (production): Tonight lower (14.4 vs 45.8). Worse for tonight's offense than that game: expect a worse offensive result on TE receiving yards.
-- TE snap share: Tonight higher (79.1 vs 38.5). Better for tonight's offense than that game: expect a better offensive result on TE involvement.
-- Edge pressure (production): Tonight lower (22.9 vs 49.5). Better for tonight's offense than that game: expect a better offensive result on sacks, QB passing.
-- Edge sack rate: Tonight higher (56.0 vs 26.3). Worse for tonight's offense than that game: expect a worse offensive result on sacks.
-- Interior DL pressure (production): Tonight lower (61.7 vs 80.7). Better for tonight's offense than that game: expect a better offensive result on sacks.
-- Interior DL run stop (production): Tonight lower (48.4 vs 88.5). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
-- LB tackles (production): Tonight higher (85.4 vs 60.3). Worse for tonight's offense than that game: expect a worse offensive result on RB yards.
-- CB yards per target (production): Tonight higher (56.3 vs 40.5). Worse for tonight's offense than that game: expect a worse offensive result on WR receiving yards.
-- Safety ball skills: Tonight higher (64.7 vs 43.6). Worse for tonight's offense than that game: expect a worse offensive result on INTs, deep passes.
-- Offense rest days: Tonight higher (11 vs 8).
-- Defense rest days: Tonight lower (8 vs 11).
-- Time zones the defense travelled: Tonight higher (0 vs -2).
-- WR carries (WR1-3 runs, prior 4 games): Tonight lower (0 vs 8). Worse for tonight's offense than that game: expect a worse offensive result on WR rushing, gadget plays.
-
-<details><summary>Every attribute</summary>
-
-| Attribute | Tonight | That game | Match |
-|---|---|---|---|
-| OL pass blocking | 78.2 | 81.3 | YES |
-| OL pass block power (bull rush) | 79 | 80.8 | YES |
-| OL pass block finesse (speed rush) | 77.6 | 81.7 | YES |
-| OL run blocking | 79.6 | 81.9 | YES |
-| OL run block power (gap/drive) | 77.4 | 80.5 | YES |
-| OL run block finesse (zone) | 81 | 83.2 | YES |
-| OL impact blocking | 82.6 | 83.8 | YES |
-| OL strength | 83.8 | 86.1 | YES |
-| OL awareness | 77 | 87.2 | no |
-| OL agility (pulling/screens) | 67 | 67.1 | YES |
-| Tackles pass blocking | 81 | 82.8 | YES |
-| Tackles vs speed rush | 82.5 | 82.3 | YES |
-| Tackles run blocking | 85 | 84.2 | YES |
-| Guards/center pass blocking | 76.3 | 80.4 | YES |
-| Guards/center vs bull rush | 79 | 79.0 | YES |
-| Guards/center run blocking | 76 | 80.3 | YES |
-| Guards/center drive blocking | 74 | 79.3 | no |
-| Left tackle pass blocking (blind side) | 85 | 89.4 | YES |
-| Center awareness (line calls) | 85 | 86.9 | YES |
-| QB arm strength | 92 | 91.9 | YES |
-| QB short accuracy | 86 | 87.6 | YES |
-| QB mid accuracy | 85 | 83.4 | YES |
-| QB deep accuracy | 79 | 83.8 | YES |
-| QB throwing on the run | 85 | 83 | YES |
-| QB speed | 91 | 86.9 | YES |
-| QB awareness | 61 | 76.3 | no |
-| RB speed | 89 | 92 | YES |
-| RB elusiveness | no data tonight |  | skip |
-| RB power (trucking) | 76 | 60 | no |
-| RB vision | 84 | 80 | YES |
-| RB ball security | 89 | 92 | YES |
-| RB hands | 76 | 70 | no |
-| RB pass blocking | 58 | 48 | no |
-| WR1 speed | 88 | 90.3 | YES |
-| WR1 hands | 89 | 85.6 | YES |
-| WR1 route running | 87 | 80 | no |
-| WR1 release vs press | 86 | 84.2 | YES |
-| WR1 catch in traffic | 87 | 92 | YES |
-| WR2 speed | 92 | 92 | YES |
-| WR2 hands | 87 | 80.7 | no |
-| WR run blocking (WR1-3) | 49 | 51 | YES |
-| TE hands | no data tonight |  | skip |
-| TE speed | no data tonight |  | skip |
-| TE run blocking | no data tonight |  | skip |
-| TE pass blocking | no data tonight |  | skip |
-| Edge speed-rush moves | 73.5 | 70.6 | YES |
-| Edge power moves | 74 | 70.6 | YES |
-| Edge speed | 88.5 | 72.5 | no |
-| Interior DL power moves | 84 | 68 | no |
-| Interior DL block shedding | 84.5 | 74 | no |
-| Interior DL strength | 92.5 | 91 | YES |
-| DL tackling | 85 | 84.6 | YES |
-| LB tackling (Madden) | 83.5 | 83.5 | YES |
-| LB pursuit | 84 | 84.2 | YES |
-| LB play recognition | 73 | 73.6 | YES |
-| LB zone coverage | 65 | 60.5 | YES |
-| LB speed | 85.5 | 85.5 | YES |
-| CB man coverage | 79 | 86.9 | no |
-| CB zone coverage | 75.5 | 83.2 | no |
-| CB press | 73 | 84 | no |
-| CB speed | 92.5 | 92.8 | YES |
-| CB hands (INTs) | 72.5 | 73.6 | YES |
-| Safety zone coverage | 77 | 82.6 | no |
-| Safety hit power | 84.5 | 85 | YES |
-| Safety speed | 88.5 | 89 | YES |
-| OL sacks allowed (production) | 40.0 | 65.2 | no |
-| OL pressure allowed (production) | 32.6 | 45.1 | YES |
-| OL run blocking (production) | 45.9 | 31.0 | YES |
-| OL holding penalties (higher = cleaner) | 52.5 | 51.6 | YES |
-| OL false starts (higher = cleaner) | 30.4 | 55.4 | no |
-| OL age | 27.1 | 28.8 | YES |
-| OL experience (years) | 3.8 | 4.6 | YES |
-| QB passing (production) | 50 | 55.9 | YES |
-| QB running (production) | 80.7 | 65.6 | no |
-| QB under pressure | 43 | 42.4 | YES |
-| QB deep passing (production) | 47.6 | 26 | no |
-| QB on third down | 36.2 | 64.1 | no |
-| QB ball security | 99.4 | 98.3 | YES |
-| QB in primetime | 67.8 | 46.8 | no |
-| QB age | 25.9 | 24.8 | YES |
-| QB experience (years) | 2 | 0 | YES |
-| RB running (production) | 79 | 88.8 | YES |
-| RB run success rate | 66.1 | 92.2 | no |
-| RB explosive runs | 61.5 | 61.9 | YES |
-| RB yards after contact (production) | 63.9 | 47.7 | no |
-| RB pass catching (production) | 64.4 | 25.4 | no |
-| RB age | 27.8 | 24.2 | no |
-| WR1 efficiency (production) | 75.6 | 76.4 | YES |
-| WR1 target share | 84.7 | 86.8 | YES |
-| WR1 deep threat (production) | 61.6 | 75.7 | YES |
-| WR1 yards after catch | 39.5 | 2.2 | no |
-| WR2 efficiency (one #1 or two) | 39.6 | 7.6 | no |
-| WR2 target share | 65.2 | 38.5 | no |
-| WR3 efficiency | 21.3 | 35.5 | YES |
-| WR1 age | 33.0 | 29.1 | no |
-| TE target share | 81.9 | 40.6 | no |
-| TE efficiency (production) | 14.4 | 45.8 | no |
-| TE snap share | 79.1 | 38.5 | no |
-| Edge pressure (production) | 22.9 | 49.5 | no |
-| Edge sack rate | 56.0 | 26.3 | no |
-| Interior DL pressure (production) | 61.7 | 80.7 | no |
-| Interior DL run stop (production) | 48.4 | 88.5 | no |
-| Edge run stop (production) | 43.7 | 39.6 | YES |
-| LB tackles (production) | 85.4 | 60.3 | no |
-| LB run stop (production) | 59.9 | 64.0 | YES |
-| LB missed tackles (higher = fewer misses) | 44.7 | 49.9 | YES |
-| LB coverage (production) | 37.0 | 35.7 | YES |
-| CB yards per target (production) | 56.3 | 40.5 | no |
-| CB passer rating allowed | 53.3 | 62.5 | YES |
-| CB ball skills (production) | 67.5 | 81.3 | YES |
-| Safety ball skills | 64.7 | 43.6 | no |
-| Safety tackling | 87.6 | 88.4 | YES |
-| Defense age | 26.8 | 27.5 | YES |
-| Defense experience | 3.6 | 4.9 | YES |
-| Home / away | 1 | 1 | YES |
-| Game slot (MNF / SNF / TNF / day) | MNF | MNF | YES |
-| Week of season | 11 | 13 | YES |
-| Offense rest days | 11 | 8 | no |
-| Offense off a bye | 0 | 0 | YES |
-| Offense on a short week | 0 | 0 | YES |
-| Defense rest days | 8 | 11 | no |
-| Defense off a bye | 0 | 0 | YES |
-| Defense on a short week | 0 | 0 | YES |
-| Time zones the offense travelled | 0 | 0 | YES |
-| Time zones the defense travelled | 0 | -2 | no |
-| Dome / outdoors | 0 | 0 | YES |
-| Temperature (F) | 54 | 48 | YES |
-| Wind (mph) | 8 | 4 | YES |
-| Grass / turf | 1 | 1 | YES |
-| Division game | 0 | 0 | YES |
-| WR carries (WR1-3 runs, prior 4 games) | 0 | 8 | no |
-
-</details>
-
-## 2023 week 13: JAX 31, CIN 34 (home, MNF) -- matches 83 of 125 attributes that game has data for
+## 2023 week 13: JAX 31, CIN 34 (home, MNF) -- matches 95 of 137 attributes that game has data for
 Offense: QB Trevor Lawrence, RB Travis Etienne, WR Zay Jones / Calvin Ridley / Parker Washington, TE Evan Engram, LT Anton Harrison
 Defense: EDGE Sam Hubbard, DL DJ Reader, LB Logan Wilson, CB Chidobe Awuzie, S Jordan Battle
 
@@ -631,6 +462,8 @@ Stats from that game:
 - WR Tim Jones: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
 - TE Evan Engram: rush 0 for 0, 0 TD | 9 targets, 9 for 82, 1 TD
 - TE Luke Farrell: rush 0 for 0, 0 TD | 1 targets, 1 for 9, 0 TD
+- Game flow, this offense: time of possession 34:12, 68 plays, 12 drives, 5.7 plays per drive, 30 sec per play, 3rd down 6/15, run rate 32%
+- Game flow, other team: time of possession 34:03, 72 plays, 12 drives, 6.0 plays per drive, 28 sec per play, 3rd down 8/14, run rate 42%
 - Defense allowed: pass 321, rush 71 on 25 carries, sacks 4, INT 0, fumbles lost 0
 
 Did NOT match (42), and what each could change tonight:
@@ -795,6 +628,18 @@ Did NOT match (42), and what each could change tonight:
 | Safety tackling | 87.6 | 75.5 | YES |
 | Defense age | 26.8 | 26.6 | YES |
 | Defense experience | 3.6 | 3.3 | YES |
+| Offense time of possession (min) (season so far) | 30.2 | 31.5 | YES |
+| Offense offensive plays per game (season so far) | 61.8 | 64.7 | YES |
+| Offense pace (possession seconds per play) (season so far) | 29.3 | 29.2 | YES |
+| Offense 3rd-down conversion rate (season so far) | 0.33 | 0.36 | YES |
+| Offense run rate (season so far) | 0.36 | 0.39 | YES |
+| Offense plays per drive (season so far) | 5.4 | 5.7 | YES |
+| Defense allowed: time of possession (min) (season so far) | 29.7 | 30.3 | YES |
+| Defense allowed: offensive plays per game (season so far) | 61.1 | 63 | YES |
+| Defense allowed: pace (possession seconds per play) (season so far) | 29.5 | 28.8 | YES |
+| Defense allowed: 3rd-down conversion rate (season so far) | 0.47 | 0.44 | YES |
+| Defense allowed: run rate (season so far) | 0.36 | 0.38 | YES |
+| Defense allowed: plays per drive (season so far) | 5.8 | 5.8 | YES |
 | Home / away | 1 | 1 | YES |
 | Game slot (MNF / SNF / TNF / day) | MNF | MNF | YES |
 | Week of season | 11 | 13 | YES |
@@ -812,5 +657,223 @@ Did NOT match (42), and what each could change tonight:
 | Grass / turf | 1 | 1 | YES |
 | Division game | 0 | 0 | YES |
 | WR carries (WR1-3 runs, prior 4 games) | 0 | 1 | YES |
+
+</details>
+
+## 2024 week 13: DEN 41, CLE 32 (home, MNF) -- matches 92 of 138 attributes that game has data for
+Offense: QB Bo Nix, RB Jaleel McLaughlin, WR Courtland Sutton / Troy Franklin / Marvin Mims Jr., TE Lucas Krull, LT Garett Bolles
+Defense: EDGE Dalvin Tomlinson, DL Maurice Hurst, LB Jordan Hicks, CB Martin Emerson, S Grant Delpit
+
+Stats from that game:
+- QB Bo Nix: 18/35, 294 yds, 1 TD, 2 INT, sacked 0, rush 3 for 4
+- RB Jaleel McLaughlin: rush 14 for 84, 0 TD | 2 targets, 1 for 0, 0 TD
+- RB Javonte Williams: rush 4 for 1, 1 TD | 2 targets, 1 for 3, 0 TD
+- RB Audric Estimé: rush 3 for 12, 0 TD | 0 targets, 0 for 0, 0 TD
+- WR Marvin Mims Jr.: rush 1 for 4, 0 TD | 4 targets, 3 for 105, 1 TD
+- WR Courtland Sutton: rush 0 for 0, 0 TD | 9 targets, 6 for 102, 0 TD
+- WR Troy Franklin: rush 0 for 0, 0 TD | 5 targets, 2 for 28, 0 TD
+- WR Devaughn Vele: rush 0 for 0, 0 TD | 4 targets, 1 for 16, 0 TD
+- TE Lucas Krull: rush 0 for 0, 0 TD | 3 targets, 3 for 24, 0 TD
+- TE Adam Trautman: rush 0 for 0, 0 TD | 1 targets, 0 for 0, 0 TD
+- TE Nate Adkins: rush 0 for 0, 0 TD | 1 targets, 1 for 16, 0 TD
+- Game flow, this offense: time of possession 27:50, 59 plays, 16 drives, 3.7 plays per drive, 28 sec per play, 3rd down 6/13, run rate 39%
+- Game flow, other team: time of possession 32:10, 85 plays, 15 drives, 5.7 plays per drive, 23 sec per play, 3rd down 9/19, run rate 26%
+- Defense allowed: pass 294, rush 106 on 26 carries, sacks 0, INT 2, fumbles lost 0
+
+Did NOT match (46), and what each could change tonight:
+- OL awareness: Tonight lower (77 vs 87.2). Worse for tonight's offense than that game: expect a worse offensive result on blitz pickup, penalties.
+- Guards/center drive blocking: Tonight lower (74 vs 79.3). Worse for tonight's offense than that game: expect a worse offensive result on short yardage, inside runs.
+- QB awareness: Tonight lower (61 vs 76.3). Worse for tonight's offense than that game: expect a worse offensive result on INTs, sacks.
+- RB power (trucking): Tonight higher (76 vs 60). Better for tonight's offense than that game: expect a better offensive result on yards after contact, short yardage.
+- RB hands: Tonight higher (76 vs 70). Better for tonight's offense than that game: expect a better offensive result on RB receptions.
+- RB pass blocking: Tonight higher (58 vs 48). Better for tonight's offense than that game: expect a better offensive result on sacks, 3rd-down usage.
+- WR1 route running: Tonight higher (87 vs 80). Better for tonight's offense than that game: expect a better offensive result on WR1 targets/catches.
+- WR2 hands: Tonight higher (87 vs 80.7). Better for tonight's offense than that game: expect a better offensive result on WR2 catches.
+- Edge speed: Tonight higher (88.5 vs 72.5). Worse for tonight's offense than that game: expect a worse offensive result on sacks, QB scrambles contained.
+- Interior DL power moves: Tonight higher (84 vs 68). Worse for tonight's offense than that game: expect a worse offensive result on interior pressure.
+- Interior DL block shedding: Tonight higher (84.5 vs 74). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
+- CB man coverage: Tonight lower (79 vs 86.9). Better for tonight's offense than that game: expect a better offensive result on WR receiving yards.
+- CB zone coverage: Tonight lower (75.5 vs 83.2). Better for tonight's offense than that game: expect a better offensive result on WR receiving yards.
+- CB press: Tonight lower (73 vs 84). Better for tonight's offense than that game: expect a better offensive result on WR releases, timing routes.
+- Safety zone coverage: Tonight lower (77 vs 82.6). Better for tonight's offense than that game: expect a better offensive result on deep passes, TE seams.
+- OL sacks allowed (production): Tonight lower (40.0 vs 65.2). Worse for tonight's offense than that game: expect a worse offensive result on sacks.
+- OL false starts (higher = cleaner): Tonight lower (30.4 vs 55.4). Worse for tonight's offense than that game: expect a worse offensive result on penalties on the road.
+- QB running (production): Tonight higher (80.7 vs 65.6). Better for tonight's offense than that game: expect a better offensive result on QB rushing yards.
+- QB deep passing (production): Tonight higher (47.6 vs 26). Better for tonight's offense than that game: expect a better offensive result on big plays.
+- QB on third down: Tonight lower (36.2 vs 64.1). Worse for tonight's offense than that game: expect a worse offensive result on drives sustained.
+- QB in primetime: Tonight higher (67.8 vs 46.8). Better for tonight's offense than that game: expect a better offensive result on night-game passing.
+- RB run success rate: Tonight lower (66.1 vs 92.2). Worse for tonight's offense than that game: expect a worse offensive result on RB rushing yards.
+- RB yards after contact (production): Tonight higher (63.9 vs 47.7). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
+- RB pass catching (production): Tonight higher (64.4 vs 25.4). Better for tonight's offense than that game: expect a better offensive result on RB receiving.
+- RB age: Tonight higher (27.8 vs 24.2).
+- WR1 yards after catch: Tonight higher (39.5 vs 2.2). Better for tonight's offense than that game: expect a better offensive result on WR1 yards.
+- WR2 efficiency (one #1 or two): Tonight higher (39.6 vs 7.6). Better for tonight's offense than that game: expect a better offensive result on WR2 yards; coverage rolled to WR1.
+- WR2 target share: Tonight higher (65.2 vs 38.5). Better for tonight's offense than that game: expect a better offensive result on WR2 targets.
+- WR1 age: Tonight higher (33.0 vs 29.1).
+- TE target share: Tonight higher (81.9 vs 40.6). Better for tonight's offense than that game: expect a better offensive result on TE targets.
+- TE efficiency (production): Tonight lower (14.4 vs 45.8). Worse for tonight's offense than that game: expect a worse offensive result on TE receiving yards.
+- TE snap share: Tonight higher (79.1 vs 38.5). Better for tonight's offense than that game: expect a better offensive result on TE involvement.
+- Edge pressure (production): Tonight lower (22.9 vs 49.5). Better for tonight's offense than that game: expect a better offensive result on sacks, QB passing.
+- Edge sack rate: Tonight higher (56.0 vs 26.3). Worse for tonight's offense than that game: expect a worse offensive result on sacks.
+- Interior DL pressure (production): Tonight lower (61.7 vs 80.7). Better for tonight's offense than that game: expect a better offensive result on sacks.
+- Interior DL run stop (production): Tonight lower (48.4 vs 88.5). Better for tonight's offense than that game: expect a better offensive result on RB rushing yards.
+- LB tackles (production): Tonight higher (85.4 vs 60.3). Worse for tonight's offense than that game: expect a worse offensive result on RB yards.
+- CB yards per target (production): Tonight higher (56.3 vs 40.5). Worse for tonight's offense than that game: expect a worse offensive result on WR receiving yards.
+- Safety ball skills: Tonight higher (64.7 vs 43.6). Worse for tonight's offense than that game: expect a worse offensive result on INTs, deep passes.
+- Defense allowed: 3rd-down conversion rate (season so far): Tonight higher (0.47 vs 0.35).
+- Defense allowed: run rate (season so far): Tonight lower (0.36 vs 0.43).
+- Defense allowed: plays per drive (season so far): Tonight higher (5.8 vs 4.9).
+- Offense rest days: Tonight higher (11 vs 8).
+- Defense rest days: Tonight lower (8 vs 11).
+- Time zones the defense travelled: Tonight higher (0 vs -2).
+- WR carries (WR1-3 runs, prior 4 games): Tonight lower (0 vs 8). Worse for tonight's offense than that game: expect a worse offensive result on WR rushing, gadget plays.
+
+<details><summary>Every attribute</summary>
+
+| Attribute | Tonight | That game | Match |
+|---|---|---|---|
+| OL pass blocking | 78.2 | 81.3 | YES |
+| OL pass block power (bull rush) | 79 | 80.8 | YES |
+| OL pass block finesse (speed rush) | 77.6 | 81.7 | YES |
+| OL run blocking | 79.6 | 81.9 | YES |
+| OL run block power (gap/drive) | 77.4 | 80.5 | YES |
+| OL run block finesse (zone) | 81 | 83.2 | YES |
+| OL impact blocking | 82.6 | 83.8 | YES |
+| OL strength | 83.8 | 86.1 | YES |
+| OL awareness | 77 | 87.2 | no |
+| OL agility (pulling/screens) | 67 | 67.1 | YES |
+| Tackles pass blocking | 81 | 82.8 | YES |
+| Tackles vs speed rush | 82.5 | 82.3 | YES |
+| Tackles run blocking | 85 | 84.2 | YES |
+| Guards/center pass blocking | 76.3 | 80.4 | YES |
+| Guards/center vs bull rush | 79 | 79.0 | YES |
+| Guards/center run blocking | 76 | 80.3 | YES |
+| Guards/center drive blocking | 74 | 79.3 | no |
+| Left tackle pass blocking (blind side) | 85 | 89.4 | YES |
+| Center awareness (line calls) | 85 | 86.9 | YES |
+| QB arm strength | 92 | 91.9 | YES |
+| QB short accuracy | 86 | 87.6 | YES |
+| QB mid accuracy | 85 | 83.4 | YES |
+| QB deep accuracy | 79 | 83.8 | YES |
+| QB throwing on the run | 85 | 83 | YES |
+| QB speed | 91 | 86.9 | YES |
+| QB awareness | 61 | 76.3 | no |
+| RB speed | 89 | 92 | YES |
+| RB elusiveness | no data tonight |  | skip |
+| RB power (trucking) | 76 | 60 | no |
+| RB vision | 84 | 80 | YES |
+| RB ball security | 89 | 92 | YES |
+| RB hands | 76 | 70 | no |
+| RB pass blocking | 58 | 48 | no |
+| WR1 speed | 88 | 90.3 | YES |
+| WR1 hands | 89 | 85.6 | YES |
+| WR1 route running | 87 | 80 | no |
+| WR1 release vs press | 86 | 84.2 | YES |
+| WR1 catch in traffic | 87 | 92 | YES |
+| WR2 speed | 92 | 92 | YES |
+| WR2 hands | 87 | 80.7 | no |
+| WR run blocking (WR1-3) | 49 | 51 | YES |
+| TE hands | no data tonight |  | skip |
+| TE speed | no data tonight |  | skip |
+| TE run blocking | no data tonight |  | skip |
+| TE pass blocking | no data tonight |  | skip |
+| Edge speed-rush moves | 73.5 | 70.6 | YES |
+| Edge power moves | 74 | 70.6 | YES |
+| Edge speed | 88.5 | 72.5 | no |
+| Interior DL power moves | 84 | 68 | no |
+| Interior DL block shedding | 84.5 | 74 | no |
+| Interior DL strength | 92.5 | 91 | YES |
+| DL tackling | 85 | 84.6 | YES |
+| LB tackling (Madden) | 83.5 | 83.5 | YES |
+| LB pursuit | 84 | 84.2 | YES |
+| LB play recognition | 73 | 73.6 | YES |
+| LB zone coverage | 65 | 60.5 | YES |
+| LB speed | 85.5 | 85.5 | YES |
+| CB man coverage | 79 | 86.9 | no |
+| CB zone coverage | 75.5 | 83.2 | no |
+| CB press | 73 | 84 | no |
+| CB speed | 92.5 | 92.8 | YES |
+| CB hands (INTs) | 72.5 | 73.6 | YES |
+| Safety zone coverage | 77 | 82.6 | no |
+| Safety hit power | 84.5 | 85 | YES |
+| Safety speed | 88.5 | 89 | YES |
+| OL sacks allowed (production) | 40.0 | 65.2 | no |
+| OL pressure allowed (production) | 32.6 | 45.1 | YES |
+| OL run blocking (production) | 45.9 | 31.0 | YES |
+| OL holding penalties (higher = cleaner) | 52.5 | 51.6 | YES |
+| OL false starts (higher = cleaner) | 30.4 | 55.4 | no |
+| OL age | 27.1 | 28.8 | YES |
+| OL experience (years) | 3.8 | 4.6 | YES |
+| QB passing (production) | 50 | 55.9 | YES |
+| QB running (production) | 80.7 | 65.6 | no |
+| QB under pressure | 43 | 42.4 | YES |
+| QB deep passing (production) | 47.6 | 26 | no |
+| QB on third down | 36.2 | 64.1 | no |
+| QB ball security | 99.4 | 98.3 | YES |
+| QB in primetime | 67.8 | 46.8 | no |
+| QB age | 25.9 | 24.8 | YES |
+| QB experience (years) | 2 | 0 | YES |
+| RB running (production) | 79 | 88.8 | YES |
+| RB run success rate | 66.1 | 92.2 | no |
+| RB explosive runs | 61.5 | 61.9 | YES |
+| RB yards after contact (production) | 63.9 | 47.7 | no |
+| RB pass catching (production) | 64.4 | 25.4 | no |
+| RB age | 27.8 | 24.2 | no |
+| WR1 efficiency (production) | 75.6 | 76.4 | YES |
+| WR1 target share | 84.7 | 86.8 | YES |
+| WR1 deep threat (production) | 61.6 | 75.7 | YES |
+| WR1 yards after catch | 39.5 | 2.2 | no |
+| WR2 efficiency (one #1 or two) | 39.6 | 7.6 | no |
+| WR2 target share | 65.2 | 38.5 | no |
+| WR3 efficiency | 21.3 | 35.5 | YES |
+| WR1 age | 33.0 | 29.1 | no |
+| TE target share | 81.9 | 40.6 | no |
+| TE efficiency (production) | 14.4 | 45.8 | no |
+| TE snap share | 79.1 | 38.5 | no |
+| Edge pressure (production) | 22.9 | 49.5 | no |
+| Edge sack rate | 56.0 | 26.3 | no |
+| Interior DL pressure (production) | 61.7 | 80.7 | no |
+| Interior DL run stop (production) | 48.4 | 88.5 | no |
+| Edge run stop (production) | 43.7 | 39.6 | YES |
+| LB tackles (production) | 85.4 | 60.3 | no |
+| LB run stop (production) | 59.9 | 64.0 | YES |
+| LB missed tackles (higher = fewer misses) | 44.7 | 49.9 | YES |
+| LB coverage (production) | 37.0 | 35.7 | YES |
+| CB yards per target (production) | 56.3 | 40.5 | no |
+| CB passer rating allowed | 53.3 | 62.5 | YES |
+| CB ball skills (production) | 67.5 | 81.3 | YES |
+| Safety ball skills | 64.7 | 43.6 | no |
+| Safety tackling | 87.6 | 88.4 | YES |
+| Defense age | 26.8 | 27.5 | YES |
+| Defense experience | 3.6 | 4.9 | YES |
+| Offense time of possession (min) (season so far) | 30.2 | 29.0 | YES |
+| Offense offensive plays per game (season so far) | 61.8 | 60.6 | YES |
+| Offense pace (possession seconds per play) (season so far) | 29.3 | 28.8 | YES |
+| Offense 3rd-down conversion rate (season so far) | 0.33 | 0.37 | YES |
+| Offense run rate (season so far) | 0.36 | 0.38 | YES |
+| Offense plays per drive (season so far) | 5.4 | 5.5 | YES |
+| Defense allowed: time of possession (min) (season so far) | 29.7 | 28.8 | YES |
+| Defense allowed: offensive plays per game (season so far) | 61.1 | 58.5 | YES |
+| Defense allowed: pace (possession seconds per play) (season so far) | 29.5 | 29.5 | YES |
+| Defense allowed: 3rd-down conversion rate (season so far) | 0.47 | 0.35 | no |
+| Defense allowed: run rate (season so far) | 0.36 | 0.43 | no |
+| Defense allowed: plays per drive (season so far) | 5.8 | 4.9 | no |
+| Home / away | 1 | 1 | YES |
+| Game slot (MNF / SNF / TNF / day) | MNF | MNF | YES |
+| Week of season | 11 | 13 | YES |
+| Offense rest days | 11 | 8 | no |
+| Offense off a bye | 0 | 0 | YES |
+| Offense on a short week | 0 | 0 | YES |
+| Defense rest days | 8 | 11 | no |
+| Defense off a bye | 0 | 0 | YES |
+| Defense on a short week | 0 | 0 | YES |
+| Time zones the offense travelled | 0 | 0 | YES |
+| Time zones the defense travelled | 0 | -2 | no |
+| Dome / outdoors | 0 | 0 | YES |
+| Temperature (F) | 54 | 48 | YES |
+| Wind (mph) | 8 | 4 | YES |
+| Grass / turf | 1 | 1 | YES |
+| Division game | 0 | 0 | YES |
+| WR carries (WR1-3 runs, prior 4 games) | 0 | 8 | no |
 
 </details>

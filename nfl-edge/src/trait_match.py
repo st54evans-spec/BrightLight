@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import numpy as np
 import pandas as pd
 import twins
+import possession
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 DB = os.path.join(ROOT, "data/processed/game_traits.parquet")
@@ -169,6 +170,16 @@ PROD = [  # (db col, cell cols averaged, label, tol, affects, higher)
     ("def_age", ["def_%s_age" % x for x in ["EDGE1", "EDGE2", "DL1", "DL2", "LB1", "LB2", "CB1", "CB2", "CB3", "S1", "S2"]], "Defense age", 1.5, "", "older defense"),
     ("def_exp", ["def_%s_exp_years" % x for x in ["EDGE1", "EDGE2", "DL1", "DL2", "LB1", "LB2", "CB1", "CB2", "CB3", "S1", "S2"]], "Defense experience", 1.5, "", "more experienced defense"),
 ]
+POSS = [  # season so far, before the game: (stat, label, tolerance, affects)
+    ("top_min", "time of possession (min)", 2.0, "plays and yards for both sides"),
+    ("plays", "offensive plays per game", 4, "volume: attempts, carries, targets"),
+    ("sec_per_play", "pace (possession seconds per play)", 2.0, "how many plays fit in the game"),
+    ("third_rate", "3rd-down conversion rate", 0.06, "drive length, time of possession"),
+    ("run_rate", "run rate", 0.06, "clock: runs keep it moving"),
+    ("plays_per_drive", "plays per drive", 0.8, "drive length, time of possession"),
+]
+POSS_ATTRS = ([(f"Offense {lab} (season so far)", f"pos_o_{k}", tol, "num", aff, "") for k, lab, tol, aff in POSS]
+              + [(f"Defense allowed: {lab} (season so far)", f"pos_d_{k}", tol, "num", aff, "") for k, lab, tol, aff in POSS])
 CONTEXT = [
     ("Home / away", "off_home", 0, "exact", "everything", ""),
     ("Game slot (MNF / SNF / TNF / day)", "slot", 0, "exact", "primetime performance", ""),
@@ -190,7 +201,7 @@ CONTEXT = [
 ]
 ATTRS = ([(lab, f"md_{u}_{f[2:]}", MT, "num", aff, hi) for u, f, lab, aff, hi in MADDEN]
          + [(lab, col, tol, "num", aff, hi) for col, _, lab, tol, aff, hi in PROD]
-         + CONTEXT)
+         + POSS_ATTRS + CONTEXT)
 TEAMMAP = {"STL": "LAR", "LA": "LAR", "SD": "LAC", "OAK": "LV"}
 
 
@@ -306,6 +317,13 @@ def profile(c, mad=None, wrc=None):
         d = pd.concat([d, mad], axis=1)
     for col, cols, *_ in PROD:
         d[col] = _mean(c, cols)
+    o, de = possession.season_so_far()
+    o = o.drop_duplicates(["game_id", "team"]); de = de.drop_duplicates(["game_id", "team"])
+    ok = c[["game_id", "offense"]].merge(o.rename(columns={"team": "offense"}), on=["game_id", "offense"], how="left")
+    dk = c[["game_id", "defense"]].merge(de.rename(columns={"team": "defense"}), on=["game_id", "defense"], how="left")
+    for k, *_ in POSS:
+        d[f"pos_o_{k}"] = ok[f"o_{k}"].values
+        d[f"pos_d_{k}"] = dk[f"d_{k}"].values
     if wrc is not None:
         d["wr_carries"] = [wrc.get((g, t), np.nan) for g, t in zip(c.game_id, c.offense)]
     for s in ["QB1", "RB1", "WR1", "WR2", "WR3", "TE1", "OT1"]:
@@ -335,6 +353,11 @@ def upcoming_profile(gid, side, temp=None, wind=None):
     m = madden_lookup()
     # an upcoming game's Madden card: this season's
     d = profile(r, attach_madden(r, m), wr_carries(pd.concat([c, r])))
+    t = pd.read_parquet(possession.OUT)
+    t = t[(t.season == int(r.season.iloc[0])) & (t.week < int(r.week.iloc[0]))]
+    for k, *_ in POSS:
+        d[f"pos_o_{k}"] = t[t.team == side][k].mean()
+        d[f"pos_d_{k}"] = t[t.opp == r.defense.iloc[0]][k].mean()
     if temp is not None:
         d["temp_f"] = temp
     if wind is not None:
@@ -414,7 +437,7 @@ def _f(x):
     if isinstance(x, (int, np.integer)) or (isinstance(x, float) and float(x).is_integer()):
         return str(int(x))
     if isinstance(x, (float, np.floating)):
-        return f"{x:.1f}"
+        return f"{x:.2f}" if abs(x) < 1 else f"{x:.1f}"
     return str(x)
 
 
@@ -431,6 +454,14 @@ def box(gid, team):
         for _, p in y.iterrows():
             out.append(f"{pos} {p.player_display_name}: rush {p.carries:.0f} for {p.rushing_yards:.0f}, "
                        f"{p.rushing_tds:.0f} TD | {p.targets:.0f} targets, {p.receptions:.0f} for {p.receiving_yards:.0f}, {p.receiving_tds:.0f} TD")
+    t = pd.read_parquet(possession.OUT)
+    for tm, lab in ((team, "Game flow, this offense"), (None, "Game flow, other team")):
+        y = t[(t.game_id == gid) & ((t.team == team) if tm else (t.team != team))]
+        if len(y):
+            y = y.iloc[0]
+            out.append(f"{lab}: time of possession {int(y.top_min)}:{int(round((y.top_min % 1) * 60)):02d}, "
+                       f"{y.plays:.0f} plays, {y.drives:.0f} drives, {y.plays_per_drive:.1f} plays per drive, "
+                       f"{y.sec_per_play:.0f} sec per play, 3rd down {y.third_conv:.0f}/{y.third_att:.0f}, run rate {y.run_rate:.0%}")
     out.append(f"Defense allowed: pass {x.passing_yards.sum():.0f}, rush {x.rushing_yards.sum():.0f} on {x.carries.sum():.0f} carries, "
                f"sacks {x.sacks_suffered.sum():.0f}, INT {x.passing_interceptions.sum():.0f}, "
                f"fumbles lost {(x.rushing_fumbles_lost + x.receiving_fumbles_lost + x.sack_fumbles_lost).sum():.0f}")
