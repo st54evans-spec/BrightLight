@@ -20,6 +20,7 @@ import numpy as np
 import pandas as pd
 import twins
 import possession
+import team_context
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 DB = os.path.join(ROOT, "data/processed/game_traits.parquet")
@@ -85,17 +86,20 @@ MADDEN = [  # (unit, Madden field, label, affects, higher)
     ("RB", "m_bcvision", "RB vision", "RB rushing yards", "better vision"),
     ("RB", "m_carrying", "RB ball security", "fumbles", "holds on better"),
     ("RB", "m_catching", "RB hands", "RB receptions", "better hands"),
+    ("RB", "m_breaktackle", "RB break tackle", "yards after contact", "breaks more tackles"),
     ("RB", "m_passblock", "RB pass blocking", "sacks, 3rd-down usage", "blocks better"),
     ("WR1", "m_speed", "WR1 speed", "WR1 deep yards", "faster WR1"),
     ("WR1", "m_catching", "WR1 hands", "WR1 catches", "better hands"),
     ("WR1", "m_routerunning", "WR1 route running", "WR1 targets/catches", "better routes"),
     ("WR1", "m_release", "WR1 release vs press", "WR1 vs press corners", "beats press better"),
     ("WR1", "m_catchintraffic", "WR1 catch in traffic", "WR1 contested catches", "wins in traffic"),
+    ("WR1", "m_breaktackle", "WR1 break tackle (after catch)", "WR1 yards after catch", "breaks more tackles"),
     ("WR2", "m_speed", "WR2 speed", "WR2 yards", "faster WR2"),
     ("WR2", "m_catching", "WR2 hands", "WR2 catches", "better hands"),
     ("WRS", "m_runblock", "WR run blocking (WR1-3)", "RB outside runs", "receivers block better"),
     ("TE", "m_catching", "TE hands", "TE catches", "better hands"),
     ("TE", "m_speed", "TE speed", "TE yards after catch / seams", "faster TE"),
+    ("TE", "m_breaktackle", "TE break tackle (after catch)", "TE yards after catch", "breaks more tackles"),
     ("TE", "m_runblock", "TE run blocking", "run game", "better blocking TE"),
     ("TE", "m_passblock", "TE pass blocking", "protection", "better pass-pro TE"),
     ("EDGE", "m_finessemoves", "Edge speed-rush moves", "sacks, QB under pressure", "better speed rushers"),
@@ -140,6 +144,7 @@ PROD = [  # (db col, cell cols averaged, label, tol, affects, higher)
     ("rb_success", ["off_RB1_rush_success"], "RB run success rate", PT, "RB rushing yards", "more consistent"),
     ("rb_explosive", ["off_RB1_explosive_runs"], "RB explosive runs", PT, "long runs", "more explosive"),
     ("rb_yac", ["off_RB1_yards_after_contact"], "RB yards after contact (production)", PT, "RB rushing yards", "breaks more tackles"),
+    ("rb_btk", ["off_RB1_broken_tackles"], "RB broken tackles (production, 2018+)", PT, "RB rushing yards", "breaks more tackles"),
     ("rb_catch", ["off_RB1_receiving_epa"], "RB pass catching (production)", PT, "RB receiving", "catches more"),
     ("rb_age", ["off_RB1_age"], "RB age", 2, "", "older back"),
     ("wr1_eff", ["off_WR1_epa_per_target"], "WR1 efficiency (production)", PT, "WR1 receiving yards", "better WR1"),
@@ -161,6 +166,8 @@ PROD = [  # (db col, cell cols averaged, label, tol, affects, higher)
     ("lb_tackle", ["def_LB1_tackles", "def_LB2_tackles"], "LB tackles (production)", PT, "RB yards", "LBs make more tackles"),
     ("lb_runstop", ["def_LB1_run_stop_tfl", "def_LB2_run_stop_tfl"], "LB run stop (production)", PT, "RB rushing yards", "better run-stopping LBs"),
     ("lb_missed", ["def_LB1_missed_tackle_rate", "def_LB2_missed_tackle_rate"], "LB missed tackles (higher = fewer misses)", PT, "RB yards after contact", "miss fewer tackles"),
+    ("edge_missed", ["def_EDGE1_missed_tackle_rate", "def_EDGE2_missed_tackle_rate"], "Edge missed tackles (higher = fewer misses)", PT, "RB yards after contact", "miss fewer tackles"),
+    ("s_missed", ["def_S1_missed_tackle_rate", "def_S2_missed_tackle_rate"], "Safety missed tackles (higher = fewer misses)", PT, "long runs, YAC", "miss fewer tackles"),
     ("lb_cover", ["def_LB1_rating_allowed", "def_LB2_rating_allowed"], "LB coverage (production)", PT, "TE/RB receiving", "cover better"),
     ("cb_ypt", ["def_CB1_yards_per_target", "def_CB2_yards_per_target", "def_CB3_yards_per_target"], "CB yards per target (production)", PT, "WR receiving yards", "allow fewer yards"),
     ("cb_rating", ["def_CB1_rating_allowed", "def_CB2_rating_allowed", "def_CB3_rating_allowed"], "CB passer rating allowed", PT, "WR receiving, passing TDs", "allow less"),
@@ -180,6 +187,90 @@ POSS = [  # season so far, before the game: (stat, label, tolerance, affects)
 ]
 POSS_ATTRS = ([(f"Offense {lab} (season so far)", f"pos_o_{k}", tol, "num", aff, "") for k, lab, tol, aff in POSS]
               + [(f"Defense allowed: {lab} (season so far)", f"pos_d_{k}", tol, "num", aff, "") for k, lab, tol, aff in POSS])
+# (stat, label, tolerance, affects, sign for tonight's offense: +1 higher helps it, -1 hurts, 0 neutral)
+TC_OFF = [
+    ("points", "Offense points per game", 4, "scoring, game script", 1),
+    ("punts", "Offense punts per game", 1.0, "drives, field position", -1),
+    ("three_outs", "Offense three-and-outs per game", 1.0, "time of possession, defense fatigue", -1),
+    ("start_yds", "Offense average starting field position (yards from own goal)", 3, "points per drive", 1),
+    ("run_in_succ", "Runs inside (behind guards/center): success rate", 0.06, "RB inside runs", 1),
+    ("run_out_succ", "Runs outside (behind tackles/TE): success rate", 0.06, "RB outside runs", 1),
+    ("stuffed", "Runs stuffed at or behind the line (share)", 0.04, "RB rushing yards", -1),
+    ("ypc", "Yards per carry", 0.5, "RB rushing yards", 1),
+    ("comp_rate", "Passing: completion rate", 0.04, "completions, QB passing yards", 1),
+    ("ypa", "Passing: yards per attempt", 0.8, "QB passing yards", 1),
+    ("td_rate", "Passing: touchdown rate", 0.015, "passing TDs", 1),
+    ("int_rate", "Passing: interception rate", 0.012, "INTs", -1),
+    ("adot", "Passing: average depth of target", 1.0, "deep vs short passing", 0),
+    ("sack_rate", "Sacks taken per dropback", 0.025, "sacks", -1),
+    ("explosive_pass", "Explosive passes (20+) per game", 1.2, "big plays", 1),
+    ("explosive_run", "Explosive runs (10+) per game", 1.2, "long runs", 1),
+    ("turnovers", "Turnovers per game", 0.6, "short fields for the other side", -1),
+    ("rz_td_rate", "Red zone touchdown rate", 0.12, "TDs vs field goals", 1),
+    ("fourth_att", "4th-down attempts per game", 0.6, "aggressiveness, extra possessions", 0),
+    ("fourth_conv", "4th-down conversion rate", 0.15, "drives extended", 1),
+    ("two_min_ypp", "Yards per play in the last 2 minutes of a half", 1.2, "end-of-half points", 1),
+    ("penalties", "Penalties per game", 1.5, "drives killed / extended", -1),
+    ("ybc_per_carry", "Rushing yards BEFORE contact per carry (the line's work, 2018+)", 0.4, "RB rushing yards", 1),
+    ("yac_per_carry", "Rushing yards AFTER contact per carry (the back's work, 2018+)", 0.3, "RB rushing yards", 1),
+    ("rush_btk", "Broken tackles on runs per game (2018+)", 1.5, "RB rushing yards, long runs", 1),
+    ("rec_btk", "Broken tackles after the catch per game (2018+)", 1.0, "receiving yards after catch", 1),
+    ("drops", "Dropped passes per game (2018+)", 0.8, "completions, drives", -1),
+    ("play_action", "Play-action rate (2022+)", 0.05, "explosive passes", 1),
+    ("motion", "Pre-snap motion rate (2022+)", 0.08, "scheme", 0),
+    ("rpo", "RPO rate (2022+)", 0.03, "QB reads, run/pass mix", 0),
+    ("screens", "Screen rate (2022+)", 0.03, "RB/WR receptions", 0),
+    ("no_huddle", "No-huddle rate (2022+)", 0.05, "pace, plays", 0),
+    ("box_faced", "Defenders in the box faced (2022+)", 0.4, "how teams defend this run game", 0),
+    ("fb_touches", "Fullback touches per game", 0.8, "short yardage, play-action", 0),
+    ("fg_pct", "Kicker: field goal %", 0.08, "points from stalled drives", 1),
+    ("fg40_pct", "Kicker: field goal % from 40+", 0.12, "long field goals vs punts", 1),
+    ("punt_net", "Punter: net yards", 3, "opponent field position", 1),
+    ("punt_ret_allowed", "Punt coverage: return yards allowed", 3, "opponent field position", -1),
+    ("kr_avg", "Kick returns: average", 3, "own field position", 1),
+    ("pr_avg", "Punt returns: average", 3, "own field position", 1),
+    ("kr_cov_allowed", "Kick coverage: return yards allowed", 3, "opponent field position", -1),
+]
+TC_DEF = [
+    ("def_sack_ahead", "Defense sack rate when its team is ahead 8+", 0.025, "sacks if tonight's offense trails", -1),
+    ("def_sack_close", "Defense sack rate in a close game", 0.025, "sacks", -1),
+    ("def_sack_behind", "Defense sack rate when its team is behind 8+", 0.025, "sacks if tonight's offense leads", -1),
+    ("opp_pass_rate_ahead", "Opponents' pass rate when this defense's team leads", 0.06, "how inflated its sack/INT numbers are", 0),
+    ("opp_pass_rate_close", "Opponents' pass rate in close games vs this defense", 0.06, "pass/run mix tonight", 0),
+    ("opp_pass_rate_behind", "Opponents' pass rate when this defense's team trails", 0.06, "pass/run mix tonight", 0),
+    ("def_ypc_close", "Run defense: yards per carry allowed, close game", 0.5, "RB rushing yards", 1),
+    ("def_ypc_ahead", "Run defense: yards per carry allowed when its team leads", 0.5, "RB rushing yards late", 1),
+    ("def_stuff_close", "Run defense: stuff rate, close game", 0.04, "RB rushing yards", -1),
+    ("a_comp_rate", "Defense allowed: completion rate", 0.04, "completions, QB passing yards", 1),
+    ("a_ypa", "Defense allowed: yards per attempt", 0.8, "QB passing yards", 1),
+    ("a_td_rate", "Defense allowed: passing TD rate", 0.015, "passing TDs", 1),
+    ("a_int_rate", "Defense: interception rate", 0.012, "INTs", -1),
+    ("a_sack_rate", "Defense: sacks per dropback", 0.025, "sacks", -1),
+    ("a_explosive_pass", "Defense allowed: explosive passes per game", 1.2, "big plays", 1),
+    ("a_explosive_run", "Defense allowed: explosive runs per game", 1.2, "long runs", 1),
+    ("a_turnovers", "Defense: takeaways per game", 0.6, "turnovers", -1),
+    ("a_rz_td_rate", "Defense allowed: red zone TD rate", 0.12, "TDs vs field goals", 1),
+    ("a_two_min_ypp", "Defense allowed: yards per play, last 2 minutes of a half", 1.2, "end-of-half points", 1),
+    ("penalties", "Defense's team penalties per game", 1.5, "free yards for tonight's offense", 1),
+    ("def_missed_tkl", "Defense missed tackles per game (2018+)", 1.5, "yards after contact / after catch", 1),
+    ("def_pressures", "Defense pressures per game (2018+)", 3, "sacks, QB passing", -1),
+    ("def_blitzes", "Defense blitzes per game (2018+)", 4, "hot reads, big plays both ways", 0),
+    ("def_blitz_rate", "Defense blitz rate (2022+)", 0.06, "hot reads, sacks", 0),
+    ("def_rushers", "Defense pass rushers per dropback (2022+)", 0.25, "protection", 0),
+    ("def_box", "Defense men in the box (2022+)", 0.4, "run lanes", -1),
+    ("points", "Defense's own offense: points per game", 4, "game script: does tonight's offense have to throw to keep up", -1),
+    ("punts", "Defense's own offense: punts per game", 1.0, "field position for tonight's offense", 1),
+    ("three_outs", "Defense's own offense: three-and-outs per game", 1.0, "defense rest / time on field", 1),
+    ("punt_net", "Defense's team punter: net yards", 3, "tonight's offense field position", -1),
+    ("kr_avg", "Defense's team kick returns", 3, "who wins field position", -1),
+    ("pr_avg", "Defense's team punt returns", 3, "who wins field position", -1),
+]
+TC_ATTRS = ([(lab, f"tc_o_{k}", tol, "num", aff, "") for k, lab, tol, aff, _ in TC_OFF]
+            + [(lab, f"tc_d_{k}", tol, "num", aff, "") for k, lab, tol, aff, _ in TC_DEF]
+            + [("Defense's own offense: time of possession", "pos_dteam_top", 2.0, "num", "how long this defense is on the field", "")])
+TC_SIGN = {f"tc_o_{k}": sg for k, *_, sg in TC_OFF}
+TC_SIGN.update({f"tc_d_{k}": sg for k, *_, sg in TC_DEF})
+TC_SIGN["pos_dteam_top"] = 1
 CONTEXT = [
     ("Home / away", "off_home", 0, "exact", "everything", ""),
     ("Game slot (MNF / SNF / TNF / day)", "slot", 0, "exact", "primetime performance", ""),
@@ -201,7 +292,7 @@ CONTEXT = [
 ]
 ATTRS = ([(lab, f"md_{u}_{f[2:]}", MT, "num", aff, hi) for u, f, lab, aff, hi in MADDEN]
          + [(lab, col, tol, "num", aff, hi) for col, _, lab, tol, aff, hi in PROD]
-         + POSS_ATTRS + CONTEXT)
+         + POSS_ATTRS + TC_ATTRS + CONTEXT)
 TEAMMAP = {"STL": "LAR", "LA": "LAR", "SD": "LAC", "OAK": "LV"}
 
 
@@ -324,6 +415,15 @@ def profile(c, mad=None, wrc=None):
     for k, *_ in POSS:
         d[f"pos_o_{k}"] = ok[f"o_{k}"].values
         d[f"pos_d_{k}"] = dk[f"d_{k}"].values
+    dt = c[["game_id", "defense"]].merge(o.rename(columns={"team": "defense"}), on=["game_id", "defense"], how="left")
+    d["pos_dteam_top"] = dt["o_top_min"].values
+    tc = team_context.season_so_far().drop_duplicates(["game_id", "team"])
+    to = c[["game_id", "offense"]].merge(tc.rename(columns={"team": "offense"}), on=["game_id", "offense"], how="left")
+    td = c[["game_id", "defense"]].merge(tc.rename(columns={"team": "defense"}), on=["game_id", "defense"], how="left")
+    for k, *_ in TC_OFF:
+        d[f"tc_o_{k}"] = to[k].values
+    for k, *_ in TC_DEF:
+        d[f"tc_d_{k}"] = td[k].values
     if wrc is not None:
         d["wr_carries"] = [wrc.get((g, t), np.nan) for g, t in zip(c.game_id, c.offense)]
     for s in ["QB1", "RB1", "WR1", "WR2", "WR3", "TE1", "OT1"]:
@@ -358,6 +458,20 @@ def upcoming_profile(gid, side, temp=None, wind=None):
     for k, *_ in POSS:
         d[f"pos_o_{k}"] = t[t.team == side][k].mean()
         d[f"pos_d_{k}"] = t[t.opp == r.defense.iloc[0]][k].mean()
+    d["pos_dteam_top"] = t[t.team == r.defense.iloc[0]]["top_min"].mean()
+    tt = pd.read_parquet(team_context.OUT)
+    tt = tt[(tt.season == int(r.season.iloc[0])) & (tt.week < int(r.week.iloc[0]))]
+    def so_far(team, k):
+        x = tt[tt.team == team]
+        if k == "fg_pct":
+            return x.fg_made.sum() / max(x.fg_att.sum(), 1)
+        if k == "fg40_pct":
+            return x.fg40_made.sum() / x.fg40_att.sum() if x.fg40_att.sum() else np.nan
+        return x[k].mean()
+    for k, *_ in TC_OFF:
+        d[f"tc_o_{k}"] = so_far(side, k)
+    for k, *_ in TC_DEF:
+        d[f"tc_d_{k}"] = so_far(r.defense.iloc[0], k)
     if temp is not None:
         d["temp_f"] = temp
     if wind is not None:
@@ -390,6 +504,10 @@ def match(gid, side, temp=None, wind=None, top=5, weeks=None):
 
 def _sign(col):
     """+1: higher helps the offense; -1: higher helps the defense; 0: neutral."""
+    if col in TC_SIGN:
+        return TC_SIGN[col]
+    if col.startswith("pos_"):
+        return 0
     if col.endswith("_age") or col.endswith("_exp") or col in ("ol_age", "ol_exp", "def_age", "def_exp", "qb_age", "qb_exp", "rb_age", "wr1_age"):
         return 0
     if col.startswith("md_"):
