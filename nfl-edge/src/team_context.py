@@ -124,6 +124,7 @@ def build():
     t = t.merge(fb, on=["game_id", "team"], how="left")
     t["fb_touches"] = t.fb_touches.fillna(0)
     t = t.merge(pfr_table(), on=["game_id", "team"], how="left").merge(ftn_table(), on=["game_id", "team"], how="left")
+    t = t.merge(ngs_table(), on=["game_id", "team"], how="left")
     t["season"] = t.game_id.str[:4].astype(int)
     t["week"] = t.game_id.str[5:7].astype(int)
     t = t.drop_duplicates(["game_id", "team"])
@@ -174,9 +175,49 @@ def ftn_table():
     return o.merge(d, on=["game_id", "team"], how="outer")
 
 
+def ngs_table():
+    """NFL Next Gen Stats (tracking, 2016+): time to throw, receiver separation, rushing over expected.
+    Offense values are the team's own; a_ values are what opponents did against this defense."""
+    d = os.path.join(ROOT, "data/raw/ngs")
+    if not os.path.exists(os.path.join(d, "ngs_passing.parquet")):
+        return pd.DataFrame(columns=["game_id", "team"])
+    def fix(df):
+        t = df.team_abbr.replace({"LAR": "LA"})
+        t = t.where(~((t == "LV") & (df.season <= 2019)), "OAK")
+        return t.where(~((t == "LAC") & (df.season == 2016)), "SD")
+    def wavg(df, val, w):
+        df = df.dropna(subset=[val, w]); df = df[df[w] > 0]
+        return (df[val] * df[w]).groupby([df.season, df.week, df.team_abbr]).sum() / df[w].groupby([df.season, df.week, df.team_abbr]).sum()
+    pa = pd.read_parquet(os.path.join(d, "ngs_passing.parquet")); pa = pa[pa.week > 0]; pa["team_abbr"] = fix(pa)
+    rc = pd.read_parquet(os.path.join(d, "ngs_receiving.parquet")); rc = rc[rc.week > 0]; rc["team_abbr"] = fix(rc)
+    ru = pd.read_parquet(os.path.join(d, "ngs_rushing.parquet")); ru = ru[ru.week > 0]; ru["team_abbr"] = fix(ru)
+    o = pd.DataFrame({
+        "time_to_throw": wavg(pa, "avg_time_to_throw", "attempts"),
+        "cpoe": wavg(pa, "completion_percentage_above_expectation", "attempts"),
+        "tight_window": wavg(pa, "aggressiveness", "attempts"),
+        "wr_separation": wavg(rc[rc.player_position == "WR"], "avg_separation", "targets"),
+        "te_separation": wavg(rc[rc.player_position == "TE"], "avg_separation", "targets"),
+        "cushion": wavg(rc, "avg_cushion", "targets"),
+        "yac_over_exp": wavg(rc, "avg_yac_above_expectation", "receptions"),
+        "ryoe_per_att": wavg(ru, "rush_yards_over_expected_per_att", "rush_attempts"),
+        "eight_box_pct": wavg(ru, "percent_attempts_gte_eight_defenders", "rush_attempts"),
+    })
+    o.index.names = ["season", "week", "team"]; o = o.reset_index()
+    g = pd.read_csv(os.path.join(ROOT, "data/raw/games.csv"), usecols=["game_id", "season", "week", "home_team", "away_team"])
+    m = pd.concat([g.rename(columns={"home_team": "team", "away_team": "opp"}), g.rename(columns={"away_team": "team", "home_team": "opp"})])
+    o = m.merge(o, on=["season", "week", "team"], how="inner")
+    cols = [c for c in o.columns if c not in ("game_id", "season", "week", "team", "opp")]
+    a = o[["game_id", "team"] + cols].rename(columns={"team": "opp", **{c: "a_" + c for c in cols}})
+    out = o[["game_id", "team", "opp"] + cols].merge(a, on=["game_id", "opp"], how="left")
+    return out.drop(columns="opp")
+
+
+NGS = ["time_to_throw", "cpoe", "tight_window", "wr_separation", "te_separation", "cushion", "yac_over_exp",
+       "ryoe_per_att", "eight_box_pct"]
+
 PARTS = ["comp_rate", "ypa", "td_rate", "int_rate", "adot", "sack_rate", "explosive_pass", "explosive_run",
          "turnovers", "rz_td_rate", "fourth_att", "fourth_conv", "two_min_ypp"]
-STATS = PARTS + ["a_" + x for x in PARTS] + ["penalties", "ybc_per_carry", "yac_per_carry", "rush_btk", "rec_btk", "drops", "def_missed_tkl", "def_pressures",
+STATS = PARTS + ["a_" + x for x in PARTS] + NGS + ["a_" + x for x in NGS] + ["penalties", "ybc_per_carry", "yac_per_carry", "rush_btk", "rec_btk", "drops", "def_missed_tkl", "def_pressures",
          "def_blitzes", "def_hurries", "play_action", "motion", "rpo", "screens", "no_huddle", "box_faced",
          "def_blitz_rate", "def_rushers", "def_box",
 "points", "punts", "three_outs", "start_yds", "run_in_succ", "run_out_succ", "stuffed", "ypc",
