@@ -95,6 +95,11 @@ def _usage():
     return _PG
 
 
+# Players ruled out for the upcoming game (injury report / inactives), by display name.
+# Set NFL_OUT="Name One,Name Two" so the next man up takes the slot instead of guessing.
+OUT = {x.strip() for x in os.environ.get("NFL_OUT", "").split(",") if x.strip()}
+
+
 def reslot(rows, i, recent, role, n, usage):
     if recent.empty:
         return
@@ -104,7 +109,7 @@ def reslot(rows, i, recent, role, n, usage):
     for _, g in recent.iterrows():
         for k in slots:
             pid = g.get(f"off_{role}{k}_player_id")
-            if pd.notna(pid):
+            if pd.notna(pid) and g.get(f"off_{role}{k}_player_display_name") not in OUT:
                 pre = f"off_{role}{k}_"
                 latest[pid] = {x[len(pre):]: g[x] for x in recent.columns if x.startswith(pre)}
     if not latest:
