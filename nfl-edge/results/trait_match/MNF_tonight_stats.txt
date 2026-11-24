@@ -1,0 +1,28 @@
+MNF: CIN at WAS, 8:15 PM ET. Stat lines from the closest past games (240 attributes, now including time to throw and separation).
+Same team, top 2 matches per side. Stats, not winners.
+
+===== WAS OFFENSE vs the other defense =====
+## 2025 week 17: JAX 23, IND 17 (away, Sun day) -- matches 171 of 234 attributes that game has data for
+- QB Trevor Lawrence: 23/37, 263 yds, 0 TD, 1 INT, sacked 2, rush 8 for 26
+- RB Travis Etienne: rush 17 for 76, 0 TD | 3 targets, 2 for 16, 0 TD
+- WR Parker Washington: rush 1 for -5, 0 TD | 10 targets, 8 for 115, 0 TD
+- WR Jakobi Meyers: rush 0 for 0, 0 TD | 9 targets, 6 for 39, 0 TD
+- WR Brian Thomas Jr.: rush 0 for 0, 0 TD | 7 targets, 4 for 39, 0 TD
+- TE Brenton Strange: rush 0 for 0, 0 TD | 5 targets, 3 for 54, 0 TD
+- Game flow, this offense: time of possession 32:19, 68 plays, 10 drives, 6.8 plays per drive, 29 sec per play, 3rd down 7/14, run rate 37%
+- Game flow, other team: time of possession 27:41, 54 plays, 11 drives, 4.9 plays per drive, 31 sec per play, 3rd down 4/11, run rate 39%
+- Defense allowed: pass 263, rush 121 on 29 carries, sacks 2, INT 1, fumbles lost 1
+
+===== CIN OFFENSE vs the other defense =====
+## 2024 week 17: CIN 30, DEN 24 (home, Saturday) -- matches 190 of 239 attributes that game has data for
+- QB Joe Burrow: 39/49, 412 yds, 3 TD, 0 INT, sacked 7, rush 4 for 25
+- RB Chase Brown: rush 20 for 67, 0 TD | 4 targets, 4 for 24, 0 TD
+- WR Ja'Marr Chase: rush 0 for 0, 0 TD | 15 targets, 9 for 102, 0 TD
+- WR Tee Higgins: rush 0 for 0, 0 TD | 12 targets, 11 for 131, 3 TD
+- WR Andrei Iosivas: rush 0 for 0, 0 TD | 4 targets, 3 for 59, 0 TD
+- TE Mike Gesicki: rush 0 for 0, 0 TD | 12 targets, 10 for 86, 0 TD
+- TE Drew Sample: rush 0 for 0, 0 TD | 1 targets, 1 for 3, 0 TD
+- TE Cam Grandy: rush 0 for 0, 0 TD | 1 targets, 1 for 7, 0 TD
+- Game flow, this offense: time of possession 41:56, 83 plays, 11 drives, 7.5 plays per drive, 30 sec per play, 3rd down 7/13, run rate 30%
+- Game flow, other team: time of possession 26:57, 60 plays, 10 drives, 6.0 plays per drive, 27 sec per play, 3rd down 4/12, run rate 35%
+- Defense allowed: pass 412, rush 115 on 28 carries, sacks 7, INT 0, fumbles lost 1
